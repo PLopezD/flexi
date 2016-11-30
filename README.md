@@ -1,4 +1,5 @@
-WORKMEOUT(working title) v0.0.1
+# Flexy (v.0.0.1) 
+
 Goal for self
 ---------
   - Use and learn new technologies to write something someone might use
@@ -10,8 +11,6 @@ Goal for app
 ----------
 Create a mobile app to track workouts amongst friends. The app should:
 
-	ALPHA
-	----
   - Allow users to upload photos so others within the challenge can view them. (upload screen)
   - Allow users to have a calendar view so they can scroll through the pictures uploaded on a given day. (calendar screen)
   - Allow users to see how many days they and others have worked out and how many days until someone loses the challenge. (leaderboard screen)
@@ -27,3 +26,7 @@ Stack
 ----------
   - React-Native
   - Express or Rails 
+  - Facebook Oauth
+  - Amazon S3
+  - Digital Ocean
+  
