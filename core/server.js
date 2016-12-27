@@ -15,7 +15,7 @@ let config = require('./config/config.js');
 // configuration ===============================================================
 mongoose.connect(config.db.url); // connect to our database
 
-// require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 app.use(morgan('dev')); 
 app.use(cookieParser()); 
@@ -34,5 +34,6 @@ app.use(flash());
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); 
+
 
 module.exports = app;
