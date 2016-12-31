@@ -1,16 +1,20 @@
 import * as types from '../actions/types';
+import { user as initialState } from '../initialState';
 
 
-export const user = (state = {
-  loggedIn : false
-}, { type, payload }) => {
+export const user = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.LOGIN:
+    let user = payload;
       return {
         ...state,
-        loggedIn: payload
+        email: payload.email,
+        fbId: payload.fbId,
+        token: payload.token,
+        name: payload.name,
+        picture: payload.picture
       };
     default:
-      return state;
+      return state
   }
 };

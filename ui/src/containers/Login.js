@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import Button from 'apsl-react-native-button'
 import { login } from '../actions/actions'
 import { 
  Text,
@@ -8,37 +7,68 @@ import {
  StyleSheet
 } from 'react-native';
 
+import {
+  LoginButton,
+  AccessToken
+} from 'react-native-fbsdk';
+
 export class Container extends Component {
   constructor() {
     super();
   }
 
   render() {
-    const anti = !this.props.loggedIn
     return (
       <View style={styles.container}>
-      <Button 
-        style={{backgroundColor: 'red'}} 
-        textStyle={{fontSize: 18}}
-        onPress={this.props.login.bind(this, anti)}>
-          login
-      </Button>
-        <Text style={styles.action}>
-          {this.props.loggedIn.toString()}
-        </Text>
+      <LoginButton
+        onLoginFinished={
+          (error, result) => {
+            if (error) {
+              alert("Login failed with error: " + result.error);
+            } else if (result.isCancelled) {
+              alert("Login was cancelled");
+            } else {
+              AccessToken.getCurrentAccessToken().then((data) => {
+                const { accessToken } = data
+                this.initUser(accessToken)
+              })
+            }
+          }
+        }
+      />
       </View>
-    );
+      );
+  }
+
+  initUser(token) {
+    fetch("https://graph.facebook.com/me?fields=email,name,picture&access_token=" + token)
+    .then((response) => response.json())
+    .then((json) => {
+      user = {};
+      user.token = token
+      user.email = json.email
+      user.name = json.name
+      user.picture = json.picture.data.url
+      user.fbId = json.id
+      this.props.login(user);
+      // send user to backend 
+      // redirect user to from page
+  })
+    .catch((err) => {
+      console.warn(err)
+      console.warn('ERROR GETTING DATA FROM FACEBOOK')
+    })
   }
 }
 
 const mapActionsToProps = (dispatch) => ({
-  login(test) {
-    return dispatch(login(test));
+  login(user) {
+    return dispatch(login(user));
   }
 });
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.user.loggedIn
+  user: state.user
 });
 
 const styles = StyleSheet.create({

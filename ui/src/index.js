@@ -5,10 +5,7 @@ import { store } from './store';
 
 export class Root extends Component {
   constructor() {
-    super();
-    this.state = {
-      loggedIn: true
-    };
+    super()
   }
 
   renderRoot(ComponentToRender) {
@@ -20,7 +17,6 @@ export class Root extends Component {
   }
 
   render() {
-    const { loggedIn } = this.state;
-    return this.renderRoot(Login);
+    return this.renderRoot(Login)
   }
 }
