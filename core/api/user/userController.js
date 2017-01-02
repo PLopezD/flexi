@@ -12,6 +12,15 @@ let controller = {
       console.log(err);
       res.json(err);
     });
+  },
+  
+  getByDeviceId: (req,res,next) => {
+    User.find({DeviceId:req.body.DeviceId})
+      .then(function(user) {
+        res.json(user)
+      }, function(err) {
+        res.json(err)
+    })
   }
 }
 
