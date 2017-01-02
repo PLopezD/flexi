@@ -1,16 +1,19 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { login } from '../actions/actions'
+import { login } from '../actions/loginActions'
 import { 
  Text,
  View,
- StyleSheet
+ StyleSheet,
+ ActivityIndicator
 } from 'react-native';
 
 import {
   LoginButton,
   AccessToken
 } from 'react-native-fbsdk';
+
+import { Header } from '../ui'
 
 export class Container extends Component {
   constructor() {
@@ -19,69 +22,58 @@ export class Container extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-      <LoginButton
-        onLoginFinished={
-          (error, result) => {
-            if (error) {
-              alert("Login failed with error: " + result.error);
-            } else if (result.isCancelled) {
-              alert("Login was cancelled");
-            } else {
-              AccessToken.getCurrentAccessToken().then((data) => {
-                const { accessToken } = data
-                this.initUser(accessToken)
-              })
-            }
-          }
-        }
-      />
+      <View>
+        <Header>flexi</Header>
+          <View style={styles.container}>
+            <LoginButton
+              onLoginFinished={this.fireFacebookLogin()}
+            />
+         <ActivityIndicator
+            animating={this.props.loading}
+            style={{height: 80}}
+            size="large"
+          />
+        </View>
       </View>
       );
   }
+  fireFacebookLogin() {
+    return (error, result) => {
+      if (error) {
+        alert("Login failed with error: " + result.error);
+      } else if (result.isCancelled) {
+        alert("Login was cancelled");
+      } else {
+        AccessToken.getCurrentAccessToken().then((data) => {
+          const { accessToken } = data
+          this.initUser(accessToken);
+        })
+      }
+    }
+  }
 
   initUser(token) {
-    fetch("https://graph.facebook.com/me?fields=email,name,picture&access_token=" + token)
-    .then((response) => response.json())
-    .then((json) => {
-      user = {};
-      user.token = token
-      user.email = json.email
-      user.name = json.name
-      user.picture = json.picture.data.url
-      user.fbId = json.id
-      this.props.login(user);
-      // send user to backend 
+      this.props.login(token);
       // redirect user to from page
-  })
-    .catch((err) => {
-      console.warn(err)
-      console.warn('ERROR GETTING DATA FROM FACEBOOK')
-    })
-  }
+    }
 }
 
 const mapActionsToProps = (dispatch) => ({
-  login(user) {
-    return dispatch(login(user));
+  login(token) {
+    return dispatch(login(token));
   }
 });
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  loading: state.ui.loading
 });
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 25,
+    paddingTop:100,
     flex: 1,
     alignItems: 'center'
-  },
-  action: {
-    backgroundColor:'red',
-    fontSize: 26,
-    height:50,
-    width:100
   }
 });
 

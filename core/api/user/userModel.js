@@ -1,12 +1,35 @@
 import mongoose from 'mongoose'
 
 let userSchema = mongoose.Schema({
-    fbId: String,
-    deviceId: String,
-    token: String,
-    email: String,
-    name: String,
-    picture: String
+  fbId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  deviceId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  token: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  picture: {
+    type: String,
+    unique: true
+  }
 });
 
 export default mongoose.model('User', userSchema);

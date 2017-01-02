@@ -8,6 +8,10 @@ export class Root extends Component {
     super()
   }
 
+  componentWillMount() {
+    console.log("msg")
+  }
+
   renderRoot(ComponentToRender) {
     return (
       <Provider store={store}>

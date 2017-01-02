@@ -4,8 +4,14 @@ import _ from 'lodash'
 
 let controller = {
   newUser: (req,res,next) => {
-    let lol = {posts: 'fuck'}
-    res.json(lol);
+    let newUser = req.body;
+    User.create(newUser)
+    .then(function(user) {
+      res.json(user);
+    }, function(err) {
+      console.log(err);
+      res.json(err);
+    });
   }
 }
 

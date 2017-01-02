@@ -31,6 +31,8 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>1169898666433207</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>FacebookDisplayName</key>
 	<string>flexi</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -69,12 +71,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-api</string>
-    <string>fbauth2</string>
-    <string>fbshareextension</string>
-  </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>peppermint.ttf</string>
+		<string>motionpicture_personaluseonly.ttf</string>
+	</array>
 </dict>
 </plist>

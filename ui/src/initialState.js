@@ -1,4 +1,6 @@
+import { LoginManager } from 'react-native-fbsdk';
 import DeviceInfo from 'react-native-device-info';
+
 const deviceId = DeviceInfo.getUniqueID()
 
 export const user = {

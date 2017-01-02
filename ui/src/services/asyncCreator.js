@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-export const createAsyncCreator = (startAction, asycnFn, endAction, moreActions) => (
+export const createAsyncCreator = (startAction, asycnFn, endAction) => (
   dispatch => {
     dispatch(createAction(startAction)());
     const dispatchEndAction = createAction(endAction);

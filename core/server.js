@@ -1,13 +1,11 @@
 let express  = require('express');
 let app      = express();
 let mongoose = require('mongoose');
-let flash    = require('connect-flash');
 let path    = require('path');
 
 let morgan       = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser   = require('body-parser');
-let session      = require('express-session');
 
 let config = require('./config/config.js');
 let api = require('./api');
@@ -28,8 +26,6 @@ app.set('view engine', 'ejs');
 
 app.use('/api', api);
 
-app.use(session({ secret: 'worblo' })); 
-app.use(flash()); 
 
 
 module.exports = app;
