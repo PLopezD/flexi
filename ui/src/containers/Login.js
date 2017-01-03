@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { login } from '../actions/loginActions'
+import { loading } from '../actions/actions'
 import { 
  Text,
  View,
@@ -21,18 +22,19 @@ export class Container extends Component {
   }
 
   render() {
-    return (
-      <View>
-        <Header>flexi</Header>
-          <View style={styles.container}>
-            <LoginButton
-              onLoginFinished={this.fireFacebookLogin()}
-            />
-         <ActivityIndicator
+    let Display = <LoginButton onLoginFinished={this.fireFacebookLogin()}/>
+    if (this.props.loading) {
+      Display = <ActivityIndicator
             animating={this.props.loading}
             style={{height: 80}}
             size="large"
           />
+    }
+    return (
+      <View>
+        <Header>flexi</Header>
+          <View style={styles.container}>
+            {Display}         
         </View>
       </View>
       );
@@ -53,14 +55,17 @@ export class Container extends Component {
   }
 
   initUser(token) {
+      this.props.startLoading();
       this.props.login(token);
-      // redirect user to from page
     }
 }
 
 const mapActionsToProps = (dispatch) => ({
   login(token) {
     return dispatch(login(token));
+  },
+  startLoading(){
+    return dispatch(loading());
   }
 });
 

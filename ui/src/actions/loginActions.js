@@ -1,5 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 const deviceId = DeviceInfo.getUniqueID()
+import { AsyncStorage } from 'react-native';
 import { createAction } from 'redux-actions';
 import * as api from '../services/api';
 import * as types from './types';
@@ -13,6 +14,7 @@ export const login = (token) => (
     // call fb
     getFbUserInfo(token).then((user)=>{
       dispatch(localLogin(user)),
+      AsyncStorage.setItem('user', JSON.stringify(user))
       api.post('api/users', user).then((result) => {
         dispatch(endLoad())
         dispatch(loggedIn())
@@ -25,7 +27,7 @@ export const login = (token) => (
     }
     )
   }
-  )
+)
 
 let getFbUserInfo = (token) => {
   let user = {};
@@ -48,3 +50,6 @@ let getFbUserInfo = (token) => {
   })
 }
 
+export const localRegisterLogin = (user) => (
+  createAction(types.LOGIN)(user)
+)
