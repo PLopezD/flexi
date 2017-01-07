@@ -1,32 +1,32 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { 
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import {
  Text,
  View,
  StyleSheet
-} from 'react-native';
+} from 'react-native'
 
 export class Container extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
-  render() {
+  render () {
     return (
       <View>
         <View style={styles.container}>
           <View style={styles.main}>
-            <Text style={{fontSize:20}}>Upload picture</Text>
+            <Text style={{fontSize: 20}}>Upload picture</Text>
           </View>
         </View>
       </View>
-      );
+    )
   }
 }
 
-const mapActionsToProps = (dispatch) => ({});
+const mapActionsToProps = (dispatch) => ({})
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({})
 
 const styles = StyleSheet.create({
   container: {
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    marginTop:100,
-    flexBasis:1,
-    flexGrow:1
+    marginTop: 100,
+    flexBasis: 1,
+    flexGrow: 1
   }
-});
+})
 
-export const Upload = connect(mapStateToProps, mapActionsToProps)(Container);
+export const Upload = connect(mapStateToProps, mapActionsToProps)(Container)

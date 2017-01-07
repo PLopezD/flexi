@@ -1,34 +1,32 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { 
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import {
  Text,
  View,
  StyleSheet
-} from 'react-native';
-
-import { Header } from '../ui'
+} from 'react-native'
 
 export class Container extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
-  render() {
+  render () {
     return (
       <View>
         <View style={styles.container}>
           <View style={styles.main}>
-            <Text style={{fontSize:20}}>Scoreboard</Text>
+            <Text style={{fontSize: 20}}>Scoreboard</Text>
           </View>
         </View>
       </View>
-      );
+    )
   }
 }
 
-const mapActionsToProps = (dispatch) => ({});
+const mapActionsToProps = (dispatch) => ({})
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({})
 
 const styles = StyleSheet.create({
   container: {
@@ -38,10 +36,10 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    marginTop:100,
-    flexBasis:1,
-    flexGrow:1
+    marginTop: 100,
+    flexBasis: 1,
+    flexGrow: 1
   }
-});
+})
 
-export const Scoreboard = connect(mapStateToProps, mapActionsToProps)(Container);
+export const Scoreboard = connect(mapStateToProps, mapActionsToProps)(Container)

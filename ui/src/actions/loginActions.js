@@ -1,19 +1,21 @@
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info'
+import { AsyncStorage } from 'react-native'
+import { createAction } from 'redux-actions'
+
+import * as api from '../services/api'
+import * as types from './types'
+
 const deviceId = DeviceInfo.getUniqueID()
-import { AsyncStorage } from 'react-native';
-import { createAction } from 'redux-actions';
-import * as api from '../services/api';
-import * as types from './types';
 
 export const login = (token) => (
   dispatch => {
     dispatch(createAction(types.LOADING)())
-    const localLogin = createAction(types.LOGIN);
-    const endLoad = createAction(types.DONE_LOADING);
-    const loggedIn = createAction(types.LOGGED_IN);
+    const localLogin = createAction(types.LOGIN)
+    const endLoad = createAction(types.DONE_LOADING)
+    const loggedIn = createAction(types.LOGGED_IN)
     // call fb
-    getFbUserInfo(token).then((user)=>{
-      dispatch(localLogin(user)),
+    getFbUserInfo(token).then((user) => {
+      dispatch(localLogin(user))
       AsyncStorage.setItem('user', JSON.stringify(user))
       api.post('api/users', user).then((result) => {
         dispatch(endLoad())
@@ -30,8 +32,8 @@ export const login = (token) => (
 )
 
 let getFbUserInfo = (token) => {
-  let user = {};
-  return fetch("https://graph.facebook.com/me?fields=email,name,picture&access_token=" + token)
+  let user = {}
+  return fetch('https://graph.facebook.com/me?fields=email,name,picture&access_token=' + token)
   .then((response) => response.json())
   .then((json) => {
     user.deviceId = deviceId
@@ -40,13 +42,11 @@ let getFbUserInfo = (token) => {
     user.name = json.name
     user.picture = json.picture.data.url
     user.fbId = json.id
-    return user;
-      // send user to backend 
-      // redirect user to from page
-    })
+    return user
+  })
   .catch((err) => {
-    console.warn(err)
     console.warn('ERROR GETTING DATA FROM FACEBOOK')
+    console.warn(err)
   })
 }
 

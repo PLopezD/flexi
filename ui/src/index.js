@@ -1,42 +1,44 @@
-import DeviceInfo from 'react-native-device-info'
-import { Provider } from 'react-redux'
-import { connect } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import { AsyncStorage } from 'react-native'
 import React, { Component } from 'react'
 
-import { Login } from './containers'
-import { Main } from './containers'
-import * as api from './services/api'
+import { Login, Main } from './containers'
 import { store } from './store'
 import { localRegisterLogin } from './actions/loginActions'
 
-const deviceId = DeviceInfo.getUniqueID()
-
 class Container extends Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
-      user: {},
+      user: {}
     }
   }
-  componentWillMount() {
+
+  componentWillMount () {
+    // AsyncStorage.removeItem('user')
     AsyncStorage.getItem('user', (err, result) => {
+      if (err) {
+        console.log(err)
+        return err
+      }
       if (result) {
         let user = JSON.parse(result)
         this.props.localRegisterLogin(user)
       } else {
-        this.setState({user:false}) 
+        this.setState({ user: false })
       }
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 
-  renderRoot(ComponentToRender) {
+  renderRoot (ComponentToRender) {
     return <ComponentToRender user={this.props.user}/>
   }
 
-  render() {
+  render () {
     const { user } = this.props
-    console.log(user)
     return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
   }
 }
@@ -44,21 +46,24 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 const mapActionsToProps = (dispatch) => ({
-  localRegisterLogin(user) {
+  localRegisterLogin (user) {
     return dispatch(localRegisterLogin(user))
   }
 })
 
+Container.propTypes = {
+  localRegisterLogin: React.PropTypes.func,
+  user: React.PropTypes.object
+}
 
 const LocalRoot = connect(mapStateToProps, mapActionsToProps)(Container)
 
-
 export class Root extends Component {
-  render(){
+  render () {
     return (
       <Provider store={store}>
         <LocalRoot/>
       </Provider>
-    ) 
+    )
   }
 }

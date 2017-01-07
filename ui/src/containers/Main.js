@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import TabView from 'react-native-scrollable-tab-view';
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import TabView from 'react-native-scrollable-tab-view'
 
-import { Scoreboard } from './Scoreboard';
-import { Upload } from './Upload';
-import { Calendar } from './Calendar';
-import { TabBar } from './TabBar';
+import { Scoreboard } from './Scoreboard'
+import { Upload } from './Upload'
+import { Calendar } from './Calendar'
+import { TabBar } from './TabBar'
 
 import { Header } from '../ui'
 
 export class Main extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       activeTab: 0
     }
   }
 
   handleTabChange = ({i}) => {
-    this.setState({activeTab: i});
+    this.setState({activeTab: i})
   }
 
-  render() {
+  render () {
     return (
       <View style={{flex: 1}}>
         <Header>flexi</Header>
@@ -46,6 +46,6 @@ export class Main extends Component {
           />
         </TabView>
       </View>
-    );
+    )
   }
 }
