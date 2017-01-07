@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import TabView from 'react-native-scrollable-tab-view'
 
-import { Scoreboard } from './Scoreboard'
-import { Upload } from './Upload'
-import { Calendar } from './Calendar'
+import { ScoreboardTab } from './ScoreboardTab'
+import { UploadTab } from './UploadTab'
+import { CalendarTab } from './CalendarTab'
 import { TabBar } from './TabBar'
 
 import { Header } from '../ui'
@@ -13,7 +13,7 @@ export class Main extends Component {
   constructor () {
     super()
     this.state = {
-      activeTab: 0
+      activeTab: 2
     }
   }
 
@@ -32,15 +32,15 @@ export class Main extends Component {
           renderTabBar={() => <TabBar />}
         >
 
-          <Scoreboard
+          <ScoreboardTab
             tabLabel="ios-paper"
             activeTab={this.state.activeTab}
           />
-          <Upload
+          <UploadTab
             tabLabel="ios-camera"
             activeTab={this.state.activeTab}
           />
-          <Calendar
+          <CalendarTab
             tabLabel="ios-calendar"
             activeTab={this.state.activeTab}
           />

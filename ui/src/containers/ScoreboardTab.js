@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export const Scoreboard = connect(mapStateToProps, mapActionsToProps)(Container)
+export const ScoreboardTab = connect(mapStateToProps, mapActionsToProps)(Container)

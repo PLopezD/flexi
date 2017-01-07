@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.0.2",
+    "momentum": "^1.0.1",
     "react": "15.4.1",
     "react-native": "0.39.2",
+    "react-native-calendar": "^0.10.0",
     "react-native-device-info": "^0.9.7",
     "react-native-facebook-login": "^1.4.0",
     "react-native-fbsdk": "^0.4.0",

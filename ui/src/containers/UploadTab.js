@@ -16,7 +16,7 @@ export class Container extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.main}>
-            <Text style={{fontSize: 20}}>Calendar view</Text>
+            <Text style={{fontSize: 20}}>Upload picture</Text>
           </View>
         </View>
       </View>
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export const Calendar = connect(mapStateToProps, mapActionsToProps)(Container)
+export const UploadTab = connect(mapStateToProps, mapActionsToProps)(Container)

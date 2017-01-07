@@ -6,6 +6,12 @@ import {
  StyleSheet
 } from 'react-native'
 
+import { CalendarHolder } from '../ui/Calendar'
+
+import Dimensions from 'Dimensions';
+
+var {height, width} = Dimensions.get('window');
+
 export class Container extends Component {
   constructor () {
     super()
@@ -13,12 +19,8 @@ export class Container extends Component {
 
   render () {
     return (
-      <View>
-        <View style={styles.container}>
-          <View style={styles.main}>
-            <Text style={{fontSize: 20}}>Upload picture</Text>
-          </View>
-        </View>
+      <View style={styles.container}>
+        <CalendarHolder />
       </View>
     )
   }
@@ -30,16 +32,8 @@ const mapStateToProps = (state) => ({})
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  main: {
-    flex: 1,
-    marginTop: 100,
-    flexBasis: 1,
-    flexGrow: 1
+    flex: 1
   }
 })
 
-export const Upload = connect(mapStateToProps, mapActionsToProps)(Container)
+export const CalendarTab = connect(mapStateToProps, mapActionsToProps)(Container)
