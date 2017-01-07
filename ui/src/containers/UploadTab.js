@@ -6,6 +6,8 @@ import {
  StyleSheet
 } from 'react-native'
 
+import { UploadHolder } from '../ui/UploadHolder'
+
 export class Container extends Component {
   constructor () {
     super()
@@ -16,7 +18,7 @@ export class Container extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.main}>
-            <Text style={{fontSize: 20}}>Upload picture</Text>
+            <UploadHolder />
           </View>
         </View>
       </View>
