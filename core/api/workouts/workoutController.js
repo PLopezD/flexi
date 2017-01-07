@@ -4,7 +4,8 @@ import _ from 'lodash'
 
 let controller = {
   uploadWorkoutImage: (req,res,next) => {
-    //send to s3  
+    console.log(req.headers.body)
+    res.json({'good':'one'})
   }
 }
 

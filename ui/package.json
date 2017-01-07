@@ -13,6 +13,7 @@
     "react": "15.4.1",
     "react-native": "0.39.2",
     "react-native-calendar": "^0.10.0",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-device-info": "^0.9.7",
     "react-native-facebook-login": "^1.4.0",
     "react-native-fbsdk": "^0.4.0",
