@@ -1,5 +1,7 @@
 require("babel/register");
 require('./server');
+require('dotenv').config()
+
 
 var config = require('./config/config');
 var app = require('./server');
