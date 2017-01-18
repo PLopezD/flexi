@@ -28,9 +28,6 @@ const styles = StyleSheet.create({
     height: 10,
     fontSize: 30,
     fontFamily: globalStyles.PRIMARY_FONT
-  },
-  loading: {
-
   }
 })
 

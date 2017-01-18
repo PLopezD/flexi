@@ -10,7 +10,7 @@ import { CalendarHolder } from '../ui/CalendarHolder'
 
 import Dimensions from 'Dimensions';
 
-var {height, width} = Dimensions.get('window');
+let {height, width} = Dimensions.get('window');
 
 export class Container extends Component {
   constructor () {
