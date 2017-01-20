@@ -123,3 +123,12 @@ const styles = StyleSheet.create({
     fontWeight:'bold'
   }
 });
+
+
+        
+        
+        
+// <TouchableOpacity style={{backgroundColor:'yellow', width:60, height:20,marginTop:20,justifyContent: 'center',
+//         alignItems: 'center'}} onPress={this.upload.bind(this)}>
+//         <Text>Upload</Text>
+//         </TouchableOpacity>
