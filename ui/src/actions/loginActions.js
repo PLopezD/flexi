@@ -9,21 +9,21 @@ const deviceId = DeviceInfo.getUniqueID()
 
 export const login = (token) => (
   dispatch => {
-    dispatch(createAction(types.LOADING)())
+    dispatch(createAction(types.LOADING)(true))
     const localLogin = createAction(types.LOGIN)
-    const endLoad = createAction(types.DONE_LOADING)
+    const endLoad = createAction(types.LOADING)
     const loggedIn = createAction(types.LOGGED_IN)
     // call fb
     getFbUserInfo(token).then((user) => {
       dispatch(localLogin(user))
       AsyncStorage.setItem('user', JSON.stringify(user))
       api.post('api/users', user).then((result) => {
-        dispatch(endLoad())
+        dispatch(endLoad(false))
         dispatch(loggedIn())
       })
       .catch((err) => {
         console.warn(err)
-        dispatch(endLoad())
+        dispatch(endLoad(false))
         console.warn('ERROR GETTING DATA FROM CORE')
       })
     }

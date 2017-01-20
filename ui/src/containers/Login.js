@@ -55,7 +55,7 @@ export class Container extends Component {
   }
 
   initUser (token) {
-    this.props.startLoading()
+    this.props.startLoading(true)
     this.props.login(token)
   }
 }
@@ -70,8 +70,8 @@ const mapActionsToProps = (dispatch) => ({
   login (token) {
     return dispatch(login(token))
   },
-  startLoading () {
-    return dispatch(loading())
+  startLoading (bool) {
+    return dispatch(loading(bool))
   }
 })
 

@@ -27,7 +27,11 @@ export class Container extends Component {
   }
 }
 
-const mapActionsToProps = (dispatch) => ({})
+const mapActionsToProps = (dispatch) => ({
+  setModalVisibility(visible) {
+    return dispatch(setModalVisibility(visible));
+  }
+})
 
 const mapStateToProps = (state) => ({})
 

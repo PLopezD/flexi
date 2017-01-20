@@ -14,12 +14,7 @@ export const ui = (state = {
     case types.LOADING:
       return {
         ...state,
-        loading: true
-      }
-    case types.DONE_LOADING:
-      return {
-        ...state,
-        loading: false
+        loading: payload
       }
     case types.LOGGED_IN:
       return state

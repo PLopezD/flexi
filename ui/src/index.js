@@ -1,20 +1,24 @@
 import { Provider, connect } from 'react-redux'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, ActivityIndicator } from 'react-native'
 import React, { Component } from 'react'
 
-import { Login, Main } from './containers'
 import { store } from './store'
+
+import { Login, Main } from './containers'
+import { Header } from './ui/Header'
 import { localRegisterLogin } from './actions/loginActions'
+import { loading } from './actions/actions'
 
 class Container extends Component {
   constructor () {
     super()
-    this.state = {
-      user: {}
-    }
+    // this.state = {
+    //   user: {},
+    // }
   }
 
   componentWillMount () {
+    this.props.loadAction(true);
     // AsyncStorage.removeItem('user')
     AsyncStorage.getItem('user', (err, result) => {
       if (err) {
@@ -27,8 +31,10 @@ class Container extends Component {
       } else {
         this.setState({ user: false })
       }
+      this.props.loadAction(false)
     })
     .catch((err) => {
+      this.props.loadAction(false)
       console.log(err)
     })
   }
@@ -38,16 +44,30 @@ class Container extends Component {
   }
 
   render () {
+    if (this.props.loading) {
+      return(
+          <ActivityIndicator
+            animating={true}
+            style={{height: 80, paddingTop:100}}
+            size="large"
+          />
+        )
+        
+    }
     const { user } = this.props
     return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
   }
 }
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  loading: state.ui.loading
 })
 const mapActionsToProps = (dispatch) => ({
   localRegisterLogin (user) {
     return dispatch(localRegisterLogin(user))
+  },
+  loadAction(bool) {
+    return dispatch(loading(bool))
   }
 })
 

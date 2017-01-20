@@ -17,8 +17,11 @@ export default class PicModal extends Component {
       >
         
         <View style={styles.container}>
+          <Button onPress={() => this.props.setModalVisibility(false)}/>
           <Image style={styles.image} source={this.props.avatarSource} />
+
         </View>
+
       </Modal>
     )   
   }

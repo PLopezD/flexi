@@ -95,7 +95,10 @@ export class UploadHolder extends Component {
                     <Text style={styles.buttonText}>Pick a pic</Text>
                   </Button>)
     if (this.state.response) {
-      render = <PicModal avatarSource={this.state.avatarSource}/>
+      render = <PicModal 
+        avatarSource={this.state.avatarSource}
+        
+        />
     }   
     return (
       <View style={styles.container}>
