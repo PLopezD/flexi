@@ -5,8 +5,10 @@ import {
  View,
  StyleSheet
 } from 'react-native'
-
 import * as globalStyles from '../styles'
+
+import { upload } from '../actions/uploadActions'
+import { setModalVisibility } from '../actions/actions'
 import { UploadHolder } from '../ui/UploadHolder'
 
 export class Container extends Component {
@@ -19,7 +21,8 @@ export class Container extends Component {
       <View>
         <View style={styles.container}>
           <View style={styles.main}>
-            <UploadHolder />
+            <UploadHolder {...this.props}
+            />
           </View>
         </View>
       </View>
@@ -28,12 +31,18 @@ export class Container extends Component {
 }
 
 const mapActionsToProps = (dispatch) => ({
-  setModalVisibility(visible) {
-    return dispatch(setModalVisibility(visible));
+  upload(url, options) {
+    return dispatch(upload(url, options))
+  },
+  setModalVisibility(bool) {
+    return dispatch(setModalVisibility(bool))
   }
 })
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  modalVisibility: state.upload.modalVisibility,
+  activeTab: state.ui.activeTab
+})
 
 const styles = StyleSheet.create({
   container: {

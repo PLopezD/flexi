@@ -9,3 +9,6 @@ export const setModalVisibility = (bool) => (
   createAction(types.SET_MODAL_VISIBILITY)(bool)
 )
 
+export const changeTab = (tabIndex) => (
+  createAction(types.CHANGE_TAB)(tabIndex)
+)

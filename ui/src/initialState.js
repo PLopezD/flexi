@@ -10,3 +10,7 @@ export const user = {
   name: null,
   picture: null
 }
+
+export const upload = {
+  modalVisibility:false
+}

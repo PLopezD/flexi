@@ -9,7 +9,7 @@ export const ui = (state = {
     case types.CHANGE_TAB:
       return {
         ...state,
-        activeTab: payload.activeTab
+        activeTab: payload
       }
     case types.LOADING:
       return {

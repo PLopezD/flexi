@@ -16,40 +16,40 @@ import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window');
 
 import ImagePicker from 'react-native-image-picker';
-import { RNS3 } from 'react-native-aws3';
 import Button from 'apsl-react-native-button'
 
 export class UploadHolder extends Component {
   constructor(){
     super();
     this.state = {
-      avatarSource: null,
+      imageSource: null,
       imgBase64: '',
       response: '',
+      activeImage: false
     }
   }
-
+  
   selectPhotoTapped() {
     const options = {
       quality: 1.0,
       maxWidth: 500,
       maxHeight: 500,
       storageOptions: {
-        skipBackup: true
+        skipBackup: false
       }
     };
 
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
+        this.props.changeTab(0)
+        this.setState({activeImage:false})
         console.log('User cancelled photo picker');
       }
       else if (response.error) {
+        this.props.changeTab(0)
+        this.setState({activeImage:false})
         console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
+      } else {
         var source, temp;
         temp = response.data;
 
@@ -60,49 +60,31 @@ export class UploadHolder extends Component {
         }
         this.setState({
           response:response,
-          avatarSource: source,
+          imageSource: source,
           imgBase64: temp,
+          activeImage:true
         });
+        this.props.setModalVisibility(true)
       }
     });
   }
-
-  upload() {
-    let url = this.state.response.origURL
-    let file = {
-      uri: url,
-      name: "woke.jpg",
-      type: "image/png"
-    }
-    let options = {
-      keyPrefix: "ok",
-      bucket: "flextester123",
-      region: "us-east-1",
-      accessKey: "AKIAIGQR5FTTWN2IQRIA",
-      secretKey: "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",
-      successActionStatus: 201
-    }
-
-    RNS3.put(file, options).then(response => {
-      console.log(response);
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  resetImage() {
+    this.setState({activeImage: false})
   }
   render() {
-    let render = (<Button style={styles.buttonStyle} onPress={this.selectPhotoTapped.bind(this)}>
-                    <Text style={styles.buttonText}>Pick a pic</Text>
-                  </Button>)
-    if (this.state.response) {
-      render = <PicModal 
-        avatarSource={this.state.avatarSource}
-        
-        />
-    }   
+    if (this.props.activeTab === 1 && this.state.activeImage === false) {
+      this.selectPhotoTapped()
+    }
+
     return (
       <View style={styles.container}>
-        {render}
+        <PicModal 
+          visibility={this.props.modalVisibility}
+          imageSource={this.state.imageSource}
+          upload={this.props.upload}
+          resetImage={this.resetImage.bind(this)}
+          {...this.props}
+        />
       </View>
       );
   }

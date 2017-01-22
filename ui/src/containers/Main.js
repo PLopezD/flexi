@@ -1,3 +1,4 @@
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import TabView from 'react-native-scrollable-tab-view'
@@ -9,43 +10,55 @@ import { TabBar } from './TabBar'
 
 import { Header } from '../ui'
 
-export class Main extends Component {
+import { changeTab } from '../actions/actions'
+
+export class Container extends Component {
   constructor () {
     super()
-    this.state = {
-      activeTab: 2
-    }
   }
-
   handleTabChange = ({i}) => {
-    this.setState({activeTab: i})
+    this.props.changeTab(i)
   }
-
   render () {
     return (
       <View style={{flex: 1}}>
         <Header>flexi</Header>
         <TabView
+          page={this.props.activeTab}
           tabBarTextStyle={{ fontSize: 15 }}
           tabBarPosition="bottom"
-          onChangeTab={this.handleTabChange}
+          onChangeTab={this.handleTabChange.bind(this)}
           renderTabBar={() => <TabBar />}
         >
 
           <ScoreboardTab
             tabLabel="ios-paper"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
           />
           <UploadTab
             tabLabel="ios-camera"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
+            {...this.props}
           />
           <CalendarTab
             tabLabel="ios-calendar"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
           />
         </TabView>
       </View>
     )
   }
 }
+const mapActionsToProps = (dispatch) => ({
+  changeTab(tabIndex) {
+    return dispatch(changeTab(tabIndex))
+  }
+})
+
+const mapStateToProps = (state) => ({
+  activeTab: state.ui.activeTab
+})
+
+export const Main = connect(mapStateToProps, mapActionsToProps)(Container)
+
+
