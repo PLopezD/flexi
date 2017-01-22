@@ -6,7 +6,7 @@ import {
  StyleSheet
 } from 'react-native'
 
-import { CalendarHolder } from '../ui/CalendarHolder'
+import { CalendarHolder } from '../ui'
 
 import Dimensions from 'Dimensions';
 

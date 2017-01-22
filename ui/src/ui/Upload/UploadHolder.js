@@ -1,5 +1,5 @@
-import * as globalStyles from '../styles'
-import PicModal from './PicModal'
+import * as globalStyles from '../../styles'
+import PicModal from '../PicModal'
 
 import React ,{Component} from 'react'
 import {
@@ -32,8 +32,8 @@ export class UploadHolder extends Component {
   selectPhotoTapped() {
     const options = {
       quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
+      maxWidth: 1000,
+      maxHeight: 1000,
       storageOptions: {
         skipBackup: false
       }
@@ -41,13 +41,11 @@ export class UploadHolder extends Component {
 
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-        this.props.changeTab(0)
-        this.setState({activeImage:false})
+        this.resetImage()
         console.log('User cancelled photo picker');
       }
       else if (response.error) {
-        this.props.changeTab(0)
-        this.setState({activeImage:false})
+        this.resetImage()
         console.log('ImagePicker Error: ', response.error);
       } else {
         var source, temp;
@@ -69,6 +67,7 @@ export class UploadHolder extends Component {
     });
   }
   resetImage() {
+    this.props.changeTab(0)
     this.setState({activeImage: false})
   }
   render() {
@@ -108,12 +107,3 @@ const styles = StyleSheet.create({
     fontWeight:'bold'
   }
 });
-
-
-        
-        
-        
-// <TouchableOpacity style={{backgroundColor:'yellow', width:60, height:20,marginTop:20,justifyContent: 'center',
-//         alignItems: 'center'}} onPress={this.upload.bind(this)}>
-//         <Text>Upload</Text>
-//         </TouchableOpacity>

@@ -2,7 +2,7 @@ let router = require('express').Router();
 import controller from './workoutController';
 
 router.route('/')
-  .post(controller.uploadWorkoutImage)
+  .post(controller.uploadNewWorkout)
 
 
 export default router

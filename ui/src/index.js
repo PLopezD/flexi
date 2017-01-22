@@ -8,6 +8,7 @@ import { Login, Main } from './containers'
 import { Header } from './ui/Header'
 import { localRegisterLogin } from './actions/loginActions'
 import { loading } from './actions/actions'
+import { getConfig } from './actions/getConfig'
 
 class Container extends Component {
   constructor () {
@@ -38,6 +39,9 @@ class Container extends Component {
       console.log(err)
     })
   }
+  componentDidMount() {
+    this.props.getConfig()
+  }
 
   renderRoot (ComponentToRender) {
     return <ComponentToRender user={this.props.user}/>
@@ -58,16 +62,22 @@ class Container extends Component {
     return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => 
+{
+  console.log(state)
+  return ({
   user: state.user,
   loading: state.ui.loading
-})
+})}
 const mapActionsToProps = (dispatch) => ({
   localRegisterLogin (user) {
     return dispatch(localRegisterLogin(user))
   },
   loadAction(bool) {
     return dispatch(loading(bool))
+  },
+  getConfig() {
+    return dispatch(getConfig())
   }
 })
 

@@ -9,7 +9,7 @@ import * as globalStyles from '../styles'
 
 import { upload } from '../actions/uploadActions'
 import { setModalVisibility } from '../actions/actions'
-import { UploadHolder } from '../ui/UploadHolder'
+import { UploadHolder } from '../ui'
 
 export class Container extends Component {
   constructor () {

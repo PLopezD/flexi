@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 
 let workoutSchema = mongoose.Schema({
-  title: {
-    type: String
+  user:{
+    type: Object,
+    required: true
   },
-  url: {
+  picUrl: {
     type: String,
     required: true,
     unique: true

@@ -19,21 +19,21 @@ export default class PicModal extends Component {
       >
         
         <View style={styles.container}>
-          <Button onPress={this.uploadSequence.bind(this)}/>
+          {this.props.upload && <Button onPress={this.uploadSequence.bind(this)}/>}
           <Image style={styles.image} source={this.props.imageSource} />
-          <Button onPress={this.closeModal.bind(this)}/>
+          {this.props.resetImage && <Button onPress={this.closeModal.bind(this)}/>}
         </View>
       </Modal>
     )   
   } 
   uploadSequence() {
-    this.props.upload(this.props.imageSource, 'test2')
+    this.props.upload(this.props.imageSource)
     // loading spinner
     // send to s3
     // send to backend
     // send to calendar
     // undo loading spinner
-    this.props.resetImage()
+    // this.props.resetImage()
   }
   closeModal() {
     this.props.changeTab(0)

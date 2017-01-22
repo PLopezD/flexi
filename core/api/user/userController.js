@@ -9,7 +9,6 @@ let controller = {
     .then(function(user) {
       res.json(user);
     }, function(err) {
-      console.log("msg")
       console.log(err);
       res.json(err);
     });
