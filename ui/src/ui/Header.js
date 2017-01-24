@@ -2,15 +2,13 @@ import React from 'react'
 import * as globalStyles from '../styles'
 import { Text, View, StyleSheet, Dimensions } from 'react-native'
 
-export const Header = (props) => {
-  return (
-    <View style={[styles.mainBar, props.style]}>
-      <View style={styles.headerItem}>
-        <Text style={styles.headerText}>{props.children}</Text>
-      </View>
+export const Header = (props) => (
+  <View style={[styles.mainBar, props.style]}>
+    <View style={styles.headerItem}>
+      <Text style={styles.headerText}>{props.children}</Text>
     </View>
-  )
-}
+  </View>
+)
 
 let { width } = Dimensions.get('window')
 const styles = StyleSheet.create({

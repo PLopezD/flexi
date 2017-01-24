@@ -13,9 +13,6 @@ import { getConfig } from './actions/getConfig'
 class Container extends Component {
   constructor () {
     super()
-    // this.state = {
-    //   user: {},
-    // }
   }
 
   componentWillMount () {
@@ -48,7 +45,7 @@ class Container extends Component {
   }
 
   render () {
-    if (this.props.loading) {
+    if (this.props.mainLoading) {
       return(
           <ActivityIndicator
             animating={true}
@@ -62,13 +59,14 @@ class Container extends Component {
     return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
   }
 }
-const mapStateToProps = (state) => 
-{
-  console.log(state)
-  return ({
-  user: state.user,
-  loading: state.ui.loading
-})}
+const mapStateToProps = (state) => {
+  // console.log(state)
+  return {
+    user: state.user,
+    mainLoading: state.ui.loading
+  }
+}
+
 const mapActionsToProps = (dispatch) => ({
   localRegisterLogin (user) {
     return dispatch(localRegisterLogin(user))

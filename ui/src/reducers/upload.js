@@ -3,10 +3,10 @@ import { upload as initialState } from '../initialState'
 
 export const upload = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.LOADING:
+    case types.UPLOAD_LOAD:
       return {
         ...state,
-        loading: payload
+        uploadLoad: payload
       }
     case types.SET_MODAL_VISIBILITY:
       return {

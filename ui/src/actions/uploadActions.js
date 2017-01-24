@@ -8,13 +8,15 @@ import { RNS3 } from 'react-native-aws3'
 
 export const upload = (url, options) => {
   return (dispatch, getState) => {
-
-    dispatch(createAction(types.LOADING)(true))
-    let endLoad = createAction(types.LOADING)(false)
-    let changeTab = createAction(types.CHANGE_TAB)(2)
+    dispatch(createAction(types.UPLOAD_LOAD)(true))
+    
+    let endLoad = createAction(types.UPLOAD_LOAD)(false)
+    let changeTab = createAction(types.CHANGE_TAB)(0)
+    let closeModal = createAction(types.SET_MODAL_VISIBILITY)(false)
     let config = getState().main.config
     let user = getState().user
-    let fileName = `${user.name.split(' ')[0]}${Date.now()}.jpg`
+    let timestamp = new Date().getUTCMilliseconds();
+    let fileName = `${user.name.split(' ')[0]}${timestamp}.jpg`
 
     uploadToS3(url, fileName, config).then((res) => {
       let workout = {
@@ -22,8 +24,9 @@ export const upload = (url, options) => {
         user
       }
       api.post('api/workout', workout).then(
-        dispatch(changeTab),
-        dispatch(endLoad)
+        dispatch(endLoad),
+        dispatch(closeModal),
+        dispatch(changeTab)
       )
     })
   }

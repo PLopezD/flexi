@@ -14,22 +14,32 @@ export class CalendarHolder extends Component {
   constructor () {
     super()
     this.state = {
-      selectedDate: moment().format()
+      selectedDate: moment().format('L')
     }
   }
-
+  componentDidMount() {
+    this.getWorkoutEvents()
+    this.getTodaysWorkouts(this.state.selectedDate)
+  }
+  getTodaysWorkouts(date) {
+    let form = moment(date).format('L')
+    this.setState({selectedDate: form})
+  }
+  
+  getWorkoutEvents() {
+    console.log("msg")
+  }
   render () {
     return (
       <View style={styles.container}>
         <Calendar
           ref="calendar"
-          eventDates={['2016-07-03', '2016-07-05', '2016-07-28', '2016-07-30']}
-          events={[{date: '2016-07-04', hasEventCircle: {backgroundColor: 'powderblue'}}]}
+          events={this.generateWorkoutEvents()}
           showControls
           titleFormat={'MMMM YYYY'}
           prevButtonText={'Prev'}
           nextButtonText={'Next'}
-          onDateSelect={(date) => this.setState({ selectedDate: date })}
+          onDateSelect={(date) => this.getTodaysWorkouts(date)}
           weekStart={0}
           dayHeadings={customDayHeadings}
         />
@@ -38,6 +48,9 @@ export class CalendarHolder extends Component {
         </Text>
       </View>
     )
+  }
+  generateWorkoutEvents() {
+    return [{date: '2017-01-04', hasEventCircle: {backgroundColor: 'powderblue'}},{date: '2017-01-07', hasEventCircle: {backgroundColor: 'powderblue'}}]
   }
 }
 
