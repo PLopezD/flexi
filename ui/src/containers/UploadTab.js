@@ -8,7 +8,7 @@ import {
 import * as globalStyles from '../styles'
 
 import { upload } from '../actions/uploadActions'
-import { setModalVisibility } from '../actions/actions'
+import { setModalVisibility, setImageSource } from '../actions/actions'
 import { UploadHolder } from '../ui'
 
 export class Container extends Component {
@@ -36,12 +36,16 @@ const mapActionsToProps = (dispatch) => ({
   },
   setModalVisibility(bool) {
     return dispatch(setModalVisibility(bool))
+  },
+  setImageSource(imageSrc) {
+    return dispatch(setImageSource(imageSrc))
   }
 })
 
 const mapStateToProps = (state) => ({
   modalVisibility: state.upload.modalVisibility,
-  activeTab: state.ui.activeTab
+  activeTab: state.ui.activeTab,
+  imageSrc: state.ui.imageSrc
 })
 
 const styles = StyleSheet.create({

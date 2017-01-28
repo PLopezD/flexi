@@ -6,7 +6,7 @@ import * as types from './types'
 
 import { RNS3 } from 'react-native-aws3'
 
-export const upload = (url, options) => {
+export const upload = (src, options) => {
   return (dispatch, getState) => {
     dispatch(createAction(types.UPLOAD_LOAD)(true))
     
@@ -15,15 +15,15 @@ export const upload = (url, options) => {
     let closeModal = createAction(types.SET_MODAL_VISIBILITY)(false)
     let config = getState().main.config
     let user = getState().user
-    let timestamp = new Date().getUTCMilliseconds();
+    let timestamp = new Date().toISOString();
     let fileName = `${user.name.split(' ')[0]}${timestamp}.jpg`
 
-    uploadToS3(url, fileName, config).then((res) => {
+    uploadToS3(src.uri, fileName, config).then((res) => {
       let workout = {
         picUrl: res.headers.Location,
         user
       }
-      api.post('api/workout', workout).then(
+      api.post('api/workouts', workout).then(
         dispatch(endLoad),
         dispatch(closeModal),
         dispatch(changeTab)

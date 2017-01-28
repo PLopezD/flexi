@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 import Dimensions from 'Dimensions';
-var {height, width} = Dimensions.get('window');
+let {height, width} = Dimensions.get('window');
 
 import ImagePicker from 'react-native-image-picker';
 import Button from 'apsl-react-native-button'
@@ -56,22 +56,23 @@ export class UploadHolder extends Component {
         } else {
           source = {uri: response.uri.replace('file://', ''), isStatic: true};
         }
-        this.setState({
+        this.props.setImageSource({
           response:response,
           imageSource: source,
           imgBase64: temp,
           activeImage:true
-        });
+        })
+        
         this.props.setModalVisibility(true)
       }
     });
   }
   resetImage() {
     this.props.changeTab(0)
-    this.setState({activeImage: false})
+    this.props.setImageSource({activeImage:false})
   }
   render() {
-    if (this.props.activeTab === 1 && this.state.activeImage === false) {
+    if (this.props.activeTab === 1 && this.props.imageSrc.activeImage === false) {
       this.selectPhotoTapped()
     }
 
@@ -79,7 +80,7 @@ export class UploadHolder extends Component {
       <View style={styles.container}>
         <PicModal 
           visibility={this.props.modalVisibility}
-          imageSource={this.state.imageSource}
+          imageSource={this.props.imageSrc}
           upload={this.props.upload}
           resetImage={this.resetImage.bind(this)}
           {...this.props}

@@ -1,7 +1,6 @@
 import * as types from '../actions/types'
 
 export const calendar = (state = {
-  activeTab: 0,
   loading: false
 },
   {type, payload}) => {
@@ -9,7 +8,22 @@ export const calendar = (state = {
     case types.CALENDAR_LOAD:
       return {
         ...state,
-        calendarLoad: payload
+        loading: payload
+      }
+    case types.SELECT_DATE:
+      return {
+        ...state,
+        selectedDate: payload
+      }
+    case types.STORE_USER_WORKOUTS:
+      return {
+        ...state,
+        userWorkouts: payload
+      }
+    case types.STORE_SELECTED_DATE_WORKOUTS: 
+      return  {
+        ...state,
+        selectedDateWorkouts: payload 
       }
     default:
       return state

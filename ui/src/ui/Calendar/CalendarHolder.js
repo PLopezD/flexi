@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Calendar from 'react-native-calendar'
+import Dimensions from 'Dimensions';
 
+import { WorkoutPhotos } from './WorkoutPhotos'
 import moment from 'moment';
 
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-import Dimensions from 'Dimensions';
-
 var {height, width} = Dimensions.get('window');
 
 export class CalendarHolder extends Component {
   constructor () {
     super()
-    this.state = {
-      selectedDate: moment().format('L')
-    }
   }
-  componentDidMount() {
+  componentWillMount() {
     this.getWorkoutEvents()
-    this.getTodaysWorkouts(this.state.selectedDate)
+    this.getTodaysWorkouts(new Date().toISOString())
   }
+  
   getTodaysWorkouts(date) {
-    let form = moment(date).format('L')
-    this.setState({selectedDate: form})
+    this.props.setSelectedDate(date)
+    this.props.getWorkouts(date)
+    this.props.getWorkouts(this.props.user)
   }
   
   getWorkoutEvents() {
-    console.log("msg")
+  }
+  generateWorkoutEvents() {
+    return [{date: '2017-01-04', hasEventCircle: {backgroundColor: 'powderblue'}},{date: '2017-01-07', hasEventCircle: {backgroundColor: 'powderblue'}}]
   }
   render () {
     return (
@@ -43,14 +43,9 @@ export class CalendarHolder extends Component {
           weekStart={0}
           dayHeadings={customDayHeadings}
         />
-        <Text>
-          {this.state.selectedDate}
-        </Text>
+        <WorkoutPhotos {...this.props}/>
       </View>
     )
-  }
-  generateWorkoutEvents() {
-    return [{date: '2017-01-04', hasEventCircle: {backgroundColor: 'powderblue'}},{date: '2017-01-07', hasEventCircle: {backgroundColor: 'powderblue'}}]
   }
 }
 

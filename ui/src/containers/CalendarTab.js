@@ -7,6 +7,8 @@ import {
 } from 'react-native'
 
 import { CalendarHolder } from '../ui'
+import { setSelectedDate, calendarLoad } from '../actions/actions'
+import { getWorkouts } from '../actions/standardAsyncActions'
 
 import Dimensions from 'Dimensions';
 
@@ -16,19 +18,38 @@ export class Container extends Component {
   constructor () {
     super()
   }
+  componentDidMount() {
+    this.props.calendarLoad(true);
+  }
 
   render () {
     return (
       <View style={styles.container}>
-        <CalendarHolder />
+        <CalendarHolder {...this.props}/>
       </View>
     )
   }
 }
 
-const mapActionsToProps = (dispatch) => ({})
+const mapActionsToProps = (dispatch) => ({
+  setSelectedDate(date) {
+    return dispatch(setSelectedDate(date))
+  },
+  calendarLoad(date) {
+    return dispatch(calendarLoad(date))
+  },
+  getWorkouts(date) {
+    return dispatch(getWorkouts(date))
+  }
+})
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  date: state.calendar.selectedDate,
+  loading: state.calendar.loading,
+  selectedDateWorkouts: state.calendar.selectedDateWorkouts,
+  userWorkouts: state.calendar.userWorkouts,
+  user: state.user
+})
 
 const styles = StyleSheet.create({
   container: {

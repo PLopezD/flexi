@@ -11,6 +11,7 @@ export default class PicModal extends Component {
   }
 
   render() {
+    console.log(this.props.imageSrc.imageSource)
     return (
       <Modal
         style={{ flex: 1 }}
@@ -20,7 +21,7 @@ export default class PicModal extends Component {
       >
         
         <View style={styles.container}>
-          <Image style={styles.image} source={this.props.imageSource} />
+          <Image style={styles.image} source={this.props.imageSrc.imageSource} />
           <View style={styles.buttonHolder}>
             {this.props.resetImage && <ActionButton onPress={this.closeModal.bind(this)} text='Cancel'/>}
             {this.props.upload && <ActionButton onPress={this.uploadSequence.bind(this)} text='Upload'/>}

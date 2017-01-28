@@ -15,7 +15,7 @@ const checkStatus = (response) => {
 
 const parseJSON = (response) => response.json()
 
-export const get = (path) => (
+export const get = (path, body) => (
   fetch(`http://localhost:8080/${path}`, { headers })
   .then(checkStatus)
   .then(parseJSON)
@@ -30,3 +30,8 @@ export const post = (path, data) => (
   .then(checkStatus)
   .then(parseJSON)
 )
+
+// stupid one liner for making query strings
+export const generateQueryString = (obj) => {
+  return Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
+}
