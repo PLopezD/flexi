@@ -31,8 +31,7 @@ export default class PicModal extends Component {
     )   
   } 
   uploadSequence() {
-    this.props.upload(this.props.imageSource)
-    this.reset()
+    this.props.upload(this.props.imageSrc.imageSource)
   }
   closeModal() {
     this.props.changeTab(0)
