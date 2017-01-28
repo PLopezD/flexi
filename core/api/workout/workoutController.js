@@ -27,18 +27,21 @@ let controller = {
   }
 }
 
-let _produceQuery = (param) => {
+let _produceQuery = (params) => {
   let query;
-  if (param.date) {
-    const day = moment(param.date);
+  if (params.date) {
+    const day = moment(params.date);
     const today = day.startOf('day')
     const tomorrow = moment(today).add(1, 'days')
-    query = {date : {
+    query = { date : {
           '$gte': new Date(today.toDate()),
           '$lte': new Date(tomorrow.toDate())
-          }}
+          }
+        }
+  } else if (params.user) {
+    query = {'user.email': params.user}
   } else {
-    query = req.query
+    query = params
   }
   return query
 }
