@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import { store } from './store'
 
 import { Login, Main } from './containers'
-import { Header } from './ui/Header'
 import { localRegisterLogin } from './actions/loginActions'
 import { loading } from './actions/actions'
 import { getConfig } from './actions/getConfig'
@@ -16,7 +15,7 @@ class Container extends Component {
   }
 
   componentWillMount () {
-    this.props.loadAction(true);
+    this.props.loadAction(true)
     // AsyncStorage.removeItem('user')
     AsyncStorage.getItem('user', (err, result) => {
       if (err) {
@@ -36,7 +35,7 @@ class Container extends Component {
       console.log(err)
     })
   }
-  componentDidMount() {
+  componentDidMount () {
     this.props.getConfig()
   }
 
@@ -46,14 +45,13 @@ class Container extends Component {
 
   render () {
     if (this.props.mainLoading) {
-      return(
+      return (
           <ActivityIndicator
             animating={true}
-            style={{height: 80, paddingTop:100}}
+            style={{height: 80, paddingTop: 100}}
             size="large"
           />
-        )
-        
+      )
     }
     const { user } = this.props
     return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
@@ -71,10 +69,10 @@ const mapActionsToProps = (dispatch) => ({
   localRegisterLogin (user) {
     return dispatch(localRegisterLogin(user))
   },
-  loadAction(bool) {
+  loadAction (bool) {
     return dispatch(loading(bool))
   },
-  getConfig() {
+  getConfig () {
     return dispatch(getConfig())
   }
 })
@@ -94,4 +92,10 @@ export class Root extends Component {
       </Provider>
     )
   }
+}
+
+Container.propTypes = {
+  getConfig: React.PropTypes.func,
+  loadAction: React.PropTypes.func,
+  mainLoading: React.PropTypes.func
 }

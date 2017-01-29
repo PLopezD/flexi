@@ -2,7 +2,7 @@ import React from 'react'
 import * as globalStyles from '../styles'
 import { Text, View, StyleSheet, Dimensions } from 'react-native'
 import Button from 'apsl-react-native-button'
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 const refreshIcon = (<Icon name="refresh" size={30} color="white" />)
 
 export const Header = (props) => (
@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderColor: 'transparent',
     right: 5,
-    top:15
+    top: 15
   }
 })
 
 Header.propTypes = {
-  styles: React.PropTypes.object,
   children: React.PropTypes.string,
+  getWorkouts: React.PropTypes.func,
   style: React.PropTypes.object
 }

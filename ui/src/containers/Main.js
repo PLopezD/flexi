@@ -21,7 +21,7 @@ export class Container extends Component {
   handleTabChange ({i}) {
     this.props.changeTab(i)
   }
-  componentWillMount() {
+  componentWillMount () {
     this.props.getWorkouts()
   }
 
@@ -56,10 +56,10 @@ export class Container extends Component {
   }
 }
 const mapActionsToProps = (dispatch) => ({
-  changeTab(tabIndex) {
+  changeTab (tabIndex) {
     return dispatch(changeTab(tabIndex))
   },
-  getWorkouts() {
+  getWorkouts () {
     return dispatch(getWorkouts())
   }
 })
@@ -70,4 +70,9 @@ const mapStateToProps = (state) => ({
 
 export const Main = connect(mapStateToProps, mapActionsToProps)(Container)
 
+Container.propTypes = {
+  changeTab: React.PropTypes.func,
+  getWorkouts: React.PropTypes.func,
+  activeTab: React.PropTypes.number
+}
 

@@ -14,10 +14,10 @@ export const calendar = (state = initialState,
         ...state,
         selectedDate: payload
       }
-    case types.STORE_SELECTED_DATE_WORKOUTS: 
-      return  {
+    case types.STORE_SELECTED_DATE_WORKOUTS:
+      return {
         ...state,
-        selectedDateWorkouts: payload 
+        selectedDateWorkouts: payload
       }
     case types.CALENDAR_MODAL_VISIBILITY:
       return {

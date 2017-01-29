@@ -1,31 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import Calendar from 'react-native-calendar'
-import Dimensions from 'Dimensions';
 
 import { WorkoutPhotos } from './WorkoutPhotos'
 
-const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-var {height, width} = Dimensions.get('window');
+const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export class CalendarHolder extends Component {
   constructor () {
     super()
   }
-  componentWillMount() {
+  componentWillMount () {
     this.getDaysWorkouts(new Date().toISOString())
   }
 
-  getDaysWorkouts(date) {
+  getDaysWorkouts (date) {
     this.props.setSelectedDate(date)
     this.props.getWorkouts(date)
   }
-  generateWorkoutEvents() {
+  generateWorkoutEvents () {
     let workoutBubbles = []
     if (this.props.workouts) {
-      this.props.workouts.forEach(workout => {
+      let workouts = this.props.workouts
+      workouts.forEach(workout => {
         if (workout.user.email === this.props.user.email) {
-          workoutBubbles.push({date:workout.date, hasEventCircle: {backgroundColor: 'powderblue'}})
+          workoutBubbles.push({date: workout.date, hasEventCircle: {backgroundColor: 'powderblue'}})
         }
       })
     }
@@ -53,6 +52,14 @@ export class CalendarHolder extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1
+    flex: 1
   }
 })
+
+CalendarHolder.propTypes = {
+  calendarLoad: React.PropTypes.func,
+  getWorkouts: React.PropTypes.func,
+  setSelectedDate: React.PropTypes.func,
+  user: React.PropTypes.object,
+  workouts: React.PropTypes.array
+}

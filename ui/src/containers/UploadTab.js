@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
- Text,
  View,
  StyleSheet
 } from 'react-native'
@@ -31,13 +30,13 @@ export class Container extends Component {
 }
 
 const mapActionsToProps = (dispatch) => ({
-  upload(url, options) {
+  upload (url, options) {
     return dispatch(upload(url, options))
   },
-  setModalVisibility(bool) {
+  setModalVisibility (bool) {
     return dispatch(setModalVisibility(bool))
   },
-  setImageSource(imageSrc) {
+  setImageSource (imageSrc) {
     return dispatch(setImageSource(imageSrc))
   }
 })
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   main: {
     backgroundColor: globalStyles.ACCENT_COLOR,

@@ -1,26 +1,18 @@
 import * as globalStyles from '../../styles'
 import PicModal from '../PicModal'
 
-import React ,{Component} from 'react'
+import React, {Component} from 'react'
 import {
   StyleSheet,
-  Text,
   View,
-  PixelRatio,
-  TouchableOpacity,
-  Platform,
-  Image,
+  Platform
 } from 'react-native'
 
-import Dimensions from 'Dimensions';
-let {height, width} = Dimensions.get('window');
-
-import ImagePicker from 'react-native-image-picker';
-import Button from 'apsl-react-native-button'
+import ImagePicker from 'react-native-image-picker'
 
 export class UploadHolder extends Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
     this.state = {
       imageSource: null,
       imgBase64: '',
@@ -28,8 +20,8 @@ export class UploadHolder extends Component {
       activeImage: false
     }
   }
-  
-  selectPhotoTapped() {
+
+  selectPhotoTapped () {
     const options = {
       quality: 1.0,
       maxWidth: 1000,
@@ -37,51 +29,50 @@ export class UploadHolder extends Component {
       storageOptions: {
         skipBackup: false
       }
-    };
+    }
 
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
         this.resetImage()
-        console.log('User cancelled photo picker');
-      }
-      else if (response.error) {
+        console.log('User cancelled photo picker')
+      } else if (response.error) {
         this.resetImage()
-        console.log('ImagePicker Error: ', response.error);
+        console.log('ImagePicker Error: ', response.error)
       } else {
-        var source, temp;
-        temp = response.data;
+        var source, temp
+        temp = response.data
 
         if (Platform.OS === 'android') {
-          source = {uri: response.uri, isStatic: true};
+          source = {uri: response.uri, isStatic: true}
         } else {
-          source = {uri: response.uri.replace('file://', ''), isStatic: true};
+          source = {uri: response.uri.replace('file://', ''), isStatic: true}
         }
         this.props.setImageSource({
-          response:response,
+          response,
           imageSource: source,
           imgBase64: temp,
-          activeImage:true
+          activeImage: true
         })
         this.props.setModalVisibility(true)
       }
-    });
+    })
   }
-  resetImage() {
+  resetImage () {
     this.props.changeTab(0)
-    this.props.setImageSource({activeImage:false})
+    this.props.setImageSource({activeImage: false})
   }
-  render() {
+  render () {
     if (this.props.activeTab === 1 && this.props.imageSrc.activeImage === false) {
       this.selectPhotoTapped()
     }
 
     return (
       <View style={styles.container}>
-        <PicModal 
+        <PicModal
           {...this.props}
         />
       </View>
-      );
+    )
   }
 }
 
@@ -89,17 +80,25 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop:200,
+    paddingTop: 200
   },
   buttonStyle: {
     backgroundColor: globalStyles.PRIMARY_COLOR,
     borderColor: globalStyles.SECONDARY_COLOR,
-    height:100,
-    width:100
+    height: 100,
+    width: 100
   },
   buttonText: {
-    color:'white',
-    fontSize:14,
-    fontWeight:'bold'
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold'
   }
-});
+})
+
+UploadHolder.propTypes = {
+  setModalVisibility: React.PropTypes.func,
+  setImageSource: React.PropTypes.func,
+  changeTab: React.PropTypes.func,
+  activeTab: React.PropTypes.number,
+  imageSrc: React.PropTypes.object
+}

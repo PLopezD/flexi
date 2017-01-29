@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
- Text,
  View,
  StyleSheet
 } from 'react-native'
@@ -10,16 +9,12 @@ import { CalendarHolder } from '../ui'
 import { setSelectedDate, calendarLoad, setImageSource, setCalendarModalVisibility } from '../actions/actions'
 import { getWorkouts } from '../actions/standardAsyncActions'
 
-import Dimensions from 'Dimensions';
-
-let {height, width} = Dimensions.get('window');
-
 export class Container extends Component {
   constructor () {
     super()
   }
-  componentDidMount() {
-    this.props.calendarLoad(true);
+  componentDidMount () {
+    this.props.calendarLoad(true)
   }
 
   render () {
@@ -32,20 +27,20 @@ export class Container extends Component {
 }
 
 const mapActionsToProps = (dispatch) => ({
-  setSelectedDate(date) {
+  setSelectedDate (date) {
     return dispatch(setSelectedDate(date))
   },
-  calendarLoad(date) {
+  calendarLoad (date) {
     return dispatch(calendarLoad(date))
   },
-  getWorkouts(date) {
+  getWorkouts (date) {
     return dispatch(getWorkouts(date))
   },
-  // interesting paradigm here 
-  setModalVisibility(bool) {
+  // interesting paradigm here
+  setModalVisibility (bool) {
     return dispatch(setCalendarModalVisibility(bool))
   },
-  setImageSource(imageSrc) {
+  setImageSource (imageSrc) {
     return dispatch(setImageSource(imageSrc))
   }
 })
@@ -57,7 +52,7 @@ const mapStateToProps = (state) => ({
   workouts: state.main.workouts,
   user: state.user,
   imageSrc: state.ui.imageSrc,
-  modalVisibility:state.calendar.modalVisibility
+  modalVisibility: state.calendar.modalVisibility
 })
 
 const styles = StyleSheet.create({
@@ -67,3 +62,7 @@ const styles = StyleSheet.create({
 })
 
 export const CalendarTab = connect(mapStateToProps, mapActionsToProps)(Container)
+
+Container.propTypes = {
+  calendarLoad: React.PropTypes.func
+}

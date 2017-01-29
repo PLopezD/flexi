@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 let headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -33,5 +35,5 @@ export const post = (path, data) => (
 
 // stupid one liner for making query strings
 export const generateQueryString = (obj) => {
-  return Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
+  return Object.keys(obj).reduce(function (a, k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
 }

@@ -5,7 +5,7 @@ import * as types from './types'
 
 export const getWorkouts = (params) => (
   dispatch => {
-    let query = {date:params}
+    let query = { date: params }
     let storeWorkouts = createAction(types.STORE_SELECTED_DATE_WORKOUTS)
     if (!params) {
       storeWorkouts = createAction(types.STORE_WORKOUTS)
@@ -14,15 +14,16 @@ export const getWorkouts = (params) => (
     dispatch(createAction(types.CALENDAR_LOAD)(true))
     const finishLoad = createAction(types.CALENDAR_LOAD)
     fetchWorkouts(query).then(workouts => {
-        dispatch(storeWorkouts(workouts))
-        dispatch(finishLoad(false))
-      }
-    )
-    .catch(err => dispatch(finishLoad(false)))
+      dispatch(storeWorkouts(workouts))
+      dispatch(finishLoad(false))
+    })
+    .catch(err =>
+      console.log(err),
+      dispatch(finishLoad(false)))
   }
 )
 
 const fetchWorkouts = (query) => {
   let queryString = api.generateQueryString(query)
-  return api.get(`api/workouts?${queryString}`) 
+  return api.get(`api/workouts?${queryString}`)
 }

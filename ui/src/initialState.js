@@ -14,7 +14,7 @@ export const user = {
 export const ui = {
   activeTab: 2,
   loading: false,
-  imageSrc: {activeImage:false}
+  imageSrc: {activeImage: false}
 }
 
 export const calendar = {
@@ -27,5 +27,5 @@ export const upload = {
 }
 
 export const main = {
-  config: {startDate:""}
+  config: {startDate: ''}
 }

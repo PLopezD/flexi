@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native'
 import { createAction } from 'redux-actions'
 
 import * as api from '../services/api'

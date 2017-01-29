@@ -1,8 +1,8 @@
 import React from 'react'
-import * as globalStyles from '../styles'
+// import * as globalStyles from '../styles'
 import { Text, View, StyleSheet, Dimensions } from 'react-native'
 import Button from 'apsl-react-native-button'
-let { width, height } = Dimensions.get('window')
+let { width } = Dimensions.get('window')
 
 export const ActionButton = (props) => (
   <View>
@@ -12,19 +12,21 @@ export const ActionButton = (props) => (
   </View>
 )
 
-
 const styles = StyleSheet.create({
   buttonStyle: {
-    backgroundColor:'transparent',
-    borderColor:'black',
-    borderWidth:1,
-    width: width/10,
-    height: width/10
+    backgroundColor: 'transparent',
+    borderColor: 'black',
+    borderWidth: 1,
+    width: width / 10,
+    height: width / 10
   },
   buttonText: {
-    color:'white',
-    fontSize:20
+    color: 'white',
+    fontSize: 20
   }
 })
 
-ActionButton.propTypes = {}
+ActionButton.propTypes = {
+  onPress: React.PropTypes.func,
+  children: React.PropTypes.object
+}
