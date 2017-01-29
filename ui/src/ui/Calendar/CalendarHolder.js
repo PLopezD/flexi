@@ -4,7 +4,6 @@ import Calendar from 'react-native-calendar'
 import Dimensions from 'Dimensions';
 
 import { WorkoutPhotos } from './WorkoutPhotos'
-import moment from 'moment';
 
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 var {height, width} = Dimensions.get('window');
@@ -14,20 +13,23 @@ export class CalendarHolder extends Component {
     super()
   }
   componentWillMount() {
-    this.getWorkoutEvents()
-    this.getTodaysWorkouts(new Date().toISOString())
+    this.getDaysWorkouts(new Date().toISOString())
   }
-  
-  getTodaysWorkouts(date) {
+
+  getDaysWorkouts(date) {
     this.props.setSelectedDate(date)
     this.props.getWorkouts(date)
-    this.props.getWorkouts(this.props.user)
-  }
-  
-  getWorkoutEvents() {
   }
   generateWorkoutEvents() {
-    return [{date: '2017-01-04', hasEventCircle: {backgroundColor: 'powderblue'}},{date: '2017-01-07', hasEventCircle: {backgroundColor: 'powderblue'}}]
+    let workoutBubbles = []
+    if (this.props.workouts) {
+      this.props.workouts.forEach(workout => {
+        if (workout.user.email === this.props.user.email) {
+          workoutBubbles.push({date:workout.date, hasEventCircle: {backgroundColor: 'powderblue'}})
+        }
+      })
+    }
+    return workoutBubbles
   }
   render () {
     return (
@@ -39,7 +41,7 @@ export class CalendarHolder extends Component {
           titleFormat={'MMMM YYYY'}
           prevButtonText={'Prev'}
           nextButtonText={'Next'}
-          onDateSelect={(date) => this.getTodaysWorkouts(date)}
+          onDateSelect={(date) => this.getDaysWorkouts(date)}
           weekStart={0}
           dayHeadings={customDayHeadings}
         />

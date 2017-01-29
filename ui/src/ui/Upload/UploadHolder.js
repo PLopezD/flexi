@@ -62,7 +62,6 @@ export class UploadHolder extends Component {
           imgBase64: temp,
           activeImage:true
         })
-        
         this.props.setModalVisibility(true)
       }
     });
@@ -79,10 +78,6 @@ export class UploadHolder extends Component {
     return (
       <View style={styles.container}>
         <PicModal 
-          visibility={this.props.modalVisibility}
-          imageSource={this.props.imageSrc}
-          upload={this.props.upload}
-          resetImage={this.resetImage.bind(this)}
           {...this.props}
         />
       </View>
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
     paddingTop:200,
   },
   buttonStyle: {
-    backgroundColor: globalStyles.SECONDARY_COLOR,
+    backgroundColor: globalStyles.PRIMARY_COLOR,
     borderColor: globalStyles.SECONDARY_COLOR,
     height:100,
     width:100

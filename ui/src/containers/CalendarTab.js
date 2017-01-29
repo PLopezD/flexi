@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 import { CalendarHolder } from '../ui'
-import { setSelectedDate, calendarLoad } from '../actions/actions'
+import { setSelectedDate, calendarLoad, setImageSource, setCalendarModalVisibility } from '../actions/actions'
 import { getWorkouts } from '../actions/standardAsyncActions'
 
 import Dimensions from 'Dimensions';
@@ -40,6 +40,13 @@ const mapActionsToProps = (dispatch) => ({
   },
   getWorkouts(date) {
     return dispatch(getWorkouts(date))
+  },
+  // interesting paradigm here 
+  setModalVisibility(bool) {
+    return dispatch(setCalendarModalVisibility(bool))
+  },
+  setImageSource(imageSrc) {
+    return dispatch(setImageSource(imageSrc))
   }
 })
 
@@ -47,8 +54,10 @@ const mapStateToProps = (state) => ({
   date: state.calendar.selectedDate,
   loading: state.calendar.loading,
   selectedDateWorkouts: state.calendar.selectedDateWorkouts,
-  userWorkouts: state.calendar.userWorkouts,
-  user: state.user
+  workouts: state.main.workouts,
+  user: state.user,
+  imageSrc: state.ui.imageSrc,
+  modalVisibility:state.calendar.modalVisibility
 })
 
 const styles = StyleSheet.create({

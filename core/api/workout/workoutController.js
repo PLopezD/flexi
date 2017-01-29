@@ -18,7 +18,6 @@ let controller = {
     console.log(query)
     Workout.find(query)
     .then(function(workouts) {
-      console.log(workouts)
       res.json(workouts);
     }, function(err) {
       res.json(err);
@@ -38,10 +37,8 @@ let _produceQuery = (params) => {
           '$lte': new Date(tomorrow.toDate())
           }
         }
-  } else if (params.user) {
-    query = {'user.email': params.user}
   } else {
-    query = params
+    query = {}
   }
   return query
 }

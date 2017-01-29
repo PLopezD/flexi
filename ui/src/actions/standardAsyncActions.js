@@ -7,13 +7,12 @@ export const getWorkouts = (params) => (
   dispatch => {
     let query = {date:params}
     let storeWorkouts = createAction(types.STORE_SELECTED_DATE_WORKOUTS)
-    if (params.email) {
-      storeWorkouts = createAction(types.STORE_USER_WORKOUTS)
-      query = {user: params.email}
+    if (!params) {
+      storeWorkouts = createAction(types.STORE_WORKOUTS)
+      query = {}
     }
     dispatch(createAction(types.CALENDAR_LOAD)(true))
     const finishLoad = createAction(types.CALENDAR_LOAD)
-
     fetchWorkouts(query).then(workouts => {
         dispatch(storeWorkouts(workouts))
         dispatch(finishLoad(false))

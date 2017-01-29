@@ -11,6 +11,21 @@ export const user = {
   picture: null
 }
 
+export const ui = {
+  activeTab: 2,
+  loading: false,
+  imageSrc: {activeImage:false}
+}
+
+export const calendar = {
+  loading: false,
+  modalVisibility: false
+}
+
 export const upload = {
-  modalVisibility:false
+  modalVisibility: false
+}
+
+export const main = {
+  config: {startDate:""}
 }

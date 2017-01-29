@@ -7,19 +7,21 @@ let { width, height } = Dimensions.get('window')
 export const ActionButton = (props) => (
   <View>
     <Button onPress={props.onPress} style={styles.buttonStyle}>
-     <Text style={styles.buttonText}>{props.text}</Text>
+     <Text style={styles.buttonText}>{props.children}</Text>
     </Button>
   </View>
 )
 
 
 const styles = StyleSheet.create({
-  buttonStyle:{
-    backgroundColor:'#9B59B6',
-    borderColor:'#8B59B6',
-    borderWidth:3
+  buttonStyle: {
+    backgroundColor:'transparent',
+    borderColor:'black',
+    borderWidth:1,
+    width: width/10,
+    height: width/10
   },
-  buttonText:{
+  buttonText: {
     color:'white',
     fontSize:20
   }

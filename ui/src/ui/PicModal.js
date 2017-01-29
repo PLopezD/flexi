@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import * as globalStyles from '../styles'
-import { Text, View, StyleSheet, Dimensions, Image, Modal} from 'react-native'
+import { Text, View, StyleSheet, Dimensions, Modal} from 'react-native'
+import Image from 'react-native-image-progress';
 import { ActionButton } from './ActionButton'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+const closeIcon = (<Icon name="close" size={30} color="white" />)
+const uploadIcon = (<Icon name="send" size={30} color="white" />)
+
 
 var {height, width} = Dimensions.get('window');
 
@@ -11,20 +16,22 @@ export default class PicModal extends Component {
   }
 
   render() {
-    console.log(this.props.imageSrc.imageSource)
+    let uploadButton 
+    if (this.props.activeTab === 1) {
+      uploadButton = ( <ActionButton onPress={this.uploadSequence.bind(this)}>{uploadIcon}</ActionButton> )
+    }
     return (
       <Modal
         style={{ flex: 1 }}
         animationType={'fade'}
-        visible={this.props.visibility}
+        visible={this.props.modalVisibility}
         onRequestClose={this.closeModal.bind(this)}
       >
-        
         <View style={styles.container}>
           <Image style={styles.image} source={this.props.imageSrc.imageSource} />
           <View style={styles.buttonHolder}>
-            {this.props.resetImage && <ActionButton onPress={this.closeModal.bind(this)} text='Cancel'/>}
-            {this.props.upload && <ActionButton onPress={this.uploadSequence.bind(this)} text='Upload'/>}
+            <ActionButton onPress={this.closeModal.bind(this)}>{closeIcon}</ActionButton>
+            {uploadButton}
           </View>
         </View>
       </Modal>
@@ -34,14 +41,16 @@ export default class PicModal extends Component {
     this.props.upload(this.props.imageSrc.imageSource)
   }
   closeModal() {
-    this.props.changeTab(0)
     this.props.setModalVisibility(false);
-    this.reset()
-  }
-  reset() {
     setTimeout(() => {
-      this.props.resetImage()
+      this.resetImage()
     }, 0)
+  }
+  resetImage() {
+    this.props.setImageSource({activeImage:false})
+    if (this.props.activeTab === 1) {
+      this.props.changeTab(0)
+    }
   }
 }
 
@@ -62,9 +71,5 @@ const styles = StyleSheet.create({
     width,
     bottom:0,
     justifyContent:'space-around'
-  },
-  button: {
-    color:'blue',
-    backgroundColor:'green'
   }
 })

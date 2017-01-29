@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PhotoGrid from 'react-native-photo-grid';
 import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Image from 'react-native-image-progress';
+import {PhotoItem} from './PhotoItem'
 
 let {height, width} = Dimensions.get('window');
 
@@ -9,43 +10,21 @@ let {height, width} = Dimensions.get('window');
 export class WorkoutGrid extends Component {
   constructor() {
     super();
-    this.state = { items: [] };
-  }
-
-  componentDidMount() {
-    let items = Array.apply(null, this.props.selectedDateWorkouts).map((v, i) => {
-      return { id: i, src: v.picUrl}
-    });
-    this.setState({ items });
   }
 
   render() {
     return(
       <PhotoGrid
-        data = { this.state.items }
+        data = { this.props.selectedDateWorkouts }
         itemsPerRow = { 3 }
         itemMargin = { 2 }
-        renderItem = { this.renderItem }
+        renderItem = { this.renderItem.bind(this) }
       />
     );
   }
 
   renderItem(item, itemSize) {
-    console.log(item)
-    return(
-      <TouchableOpacity
-        key = { item.id }
-        style = {{ width: itemSize, height: itemSize }}
-        onPress = { () => {
-          // Do Something
-        }}>
-        <Image
-          resizeMode = "cover"
-          style = {{ flex: 1 }}
-          source = {{ uri: item.src }}
-        />
-      </TouchableOpacity>
-    )
+    return <PhotoItem key={item._id} item={item} itemSize={itemSize} {...this.props}/>
   }
 
 }

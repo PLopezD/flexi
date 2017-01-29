@@ -13,7 +13,8 @@ router.route('/config').get((req, res) => {
     secretKey: process.env.AWS_SECRET_KEY,
     region: "us-east-1",
     bucket: "flextester123",
-    successActionStatus: 201
+    successActionStatus: 201,
+    startDate:"2017-01-01"
   })
 })
 

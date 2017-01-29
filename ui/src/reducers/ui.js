@@ -1,10 +1,8 @@
 import * as types from '../actions/types'
+import { ui as initialState } from '../initialState'
 
-export const ui = (state = {
-  activeTab: 2,
-  loading: false,
-  imageSrc: {activeImage:false}
-},
+
+export const ui = (state = initialState,
   {type, payload}) => {
   switch (type) {
     case types.CHANGE_TAB:
@@ -22,6 +20,7 @@ export const ui = (state = {
         ...state,
         imageSrc: payload
       }
+    
     case types.LOGGED_IN:
       return state
     default:

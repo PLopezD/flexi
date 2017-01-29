@@ -11,18 +11,24 @@ import { TabBar } from './TabBar'
 import { Header } from '../ui'
 
 import { changeTab } from '../actions/actions'
+import { getWorkouts } from '../actions/standardAsyncActions'
 
 export class Container extends Component {
   constructor () {
     super()
   }
-  handleTabChange = ({i}) => {
+
+  handleTabChange ({i}) {
     this.props.changeTab(i)
   }
+  componentWillMount() {
+    this.props.getWorkouts()
+  }
+
   render () {
     return (
       <View style={{flex: 1}}>
-        <Header>flexi</Header>
+        <Header {...this.props}>flexi</Header>
         <TabView
           page={this.props.activeTab}
           tabBarTextStyle={{ fontSize: 15 }}
@@ -52,6 +58,9 @@ export class Container extends Component {
 const mapActionsToProps = (dispatch) => ({
   changeTab(tabIndex) {
     return dispatch(changeTab(tabIndex))
+  },
+  getWorkouts() {
+    return dispatch(getWorkouts())
   }
 })
 

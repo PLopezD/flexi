@@ -8,9 +8,9 @@ import { RNS3 } from 'react-native-aws3'
 
 export const upload = (src, options) => {
   return (dispatch, getState) => {
-    dispatch(createAction(types.UPLOAD_LOAD)(true))
+    dispatch(createAction(types.LOADING)(true))
     
-    let endLoad = createAction(types.UPLOAD_LOAD)(false)
+    let endLoad = createAction(types.LOADING)(false)
     let changeTab = createAction(types.CHANGE_TAB)(0)
     let closeModal = createAction(types.SET_MODAL_VISIBILITY)(false)
     let config = getState().main.config
