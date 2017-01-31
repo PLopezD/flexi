@@ -19,6 +19,11 @@ export const main = (state = initialState,
         ...state,
         totalWorkoutDays: payload
       }
+    case types.STORE_USERS:
+      return {
+        ...state,
+        users: payload
+      }
     default:
       return state
   }

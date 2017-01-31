@@ -27,3 +27,12 @@ const fetchWorkouts = (query) => {
   let queryString = api.generateQueryString(query)
   return api.get(`api/workouts?${queryString}`)
 }
+
+export const getUsers = () => (
+  dispatch => {
+    let storeUsers = createAction(types.STORE_USERS)
+    api.get('api/users').then(users => {
+      dispatch(storeUsers(users))
+    })
+  }
+)

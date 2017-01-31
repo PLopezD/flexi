@@ -5,6 +5,7 @@ import moment from 'moment'
 let controller = {
   uploadNewWorkout: (req,res,next) => {
     let newWorkout = req.body;
+    newWorkout.date = moment().format('L')
     Workout.create(newWorkout)
     .then(function(workout) {
       res.json(workout);
@@ -15,9 +16,9 @@ let controller = {
   },
   getWorkouts: (req,res,next) => {
     let query = _produceQuery(req.query)
-    console.log(query)
     Workout.find(query)
     .then(function(workouts) {
+      console.log(workouts)
       res.json(workouts);
     }, function(err) {
       res.json(err);

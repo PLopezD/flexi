@@ -13,8 +13,7 @@ let controller = {
       res.json(err);
     });
   },
-
-  getByDeviceId: (req,res,next) => {
+  getUsers: (req,res,next) => {
     User.find(req.query)
       .then(function(user) {
         res.json(user)

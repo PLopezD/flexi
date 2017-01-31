@@ -7,11 +7,16 @@ import moment from 'moment'
 import weekend from 'moment-weekend'
 
 import { setTotalWorkoutDays } from '../actions/actions'
+import { getUsers } from '../actions/standardAsyncActions'
 import { ScoreBoardHolder } from '../ui'
 
 export class Container extends Component {
   constructor () {
     super()
+  }
+
+  componentWillMount() {
+    this.props.getUsers()
   }
 
   componentDidUpdate () {
@@ -27,7 +32,7 @@ export class Container extends Component {
   render () {
     return (
       <View>
-          <ScoreBoardHolder {...this.props}/>
+        <ScoreBoardHolder {...this.props}/>
       </View>
     )
   }
@@ -36,13 +41,17 @@ export class Container extends Component {
 const mapActionsToProps = (dispatch) => ({
   setTotalWorkoutDays (result) {
     return dispatch(setTotalWorkoutDays(result))
+  },
+  getUsers() {
+    return dispatch(getUsers())
   }
 })
 
 const mapStateToProps = (state) => ({
   startDate: state.main.config.startDate,
   totalWorkoutDays: state.main.totalWorkoutDays,
-  workouts: state.main.workouts
+  workouts: state.main.workouts,
+  users: state.main.users
 })
 
 export const ScoreboardTab = connect(mapStateToProps, mapActionsToProps)(Container)

@@ -97,5 +97,5 @@ export class Root extends Component {
 Container.propTypes = {
   getConfig: React.PropTypes.func,
   loadAction: React.PropTypes.func,
-  mainLoading: React.PropTypes.func
+  mainLoading: React.PropTypes.bool
 }
