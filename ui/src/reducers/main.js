@@ -24,6 +24,11 @@ export const main = (state = initialState,
         ...state,
         users: payload
       }
+    case types.STORE_SCOREBOARD:
+      return {
+        ...state,
+        scoreboard: payload
+      }
     default:
       return state
   }

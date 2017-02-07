@@ -4,7 +4,6 @@ require('dotenv').config()
 router.use('/users', require('./user/userRoutes'));
 router.use('/workouts', require('./workout/workoutRoutes'));
 
-
 // route for aws access key, can be reset if i need to 
 
 router.route('/config').get((req, res) => {

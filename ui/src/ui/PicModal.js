@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 const closeIcon = (<Icon name="close" size={30} color="white" />)
 const uploadIcon = (<Icon name="send" size={30} color="white" />)
 
-var {height, width} = Dimensions.get('window')
+let {height, width} = Dimensions.get('window')
 
 export default class PicModal extends Component {
   constructor () {

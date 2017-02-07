@@ -5,6 +5,8 @@ let headers = {
   'Accept': 'application/json'
 }
 
+let host = 'http://localhost:8080/'
+
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -18,13 +20,13 @@ const checkStatus = (response) => {
 const parseJSON = (response) => response.json()
 
 export const get = (path, body) => (
-  fetch(`http://localhost:8080/${path}`, { headers })
+  fetch(`${host}${path}`, { headers })
   .then(checkStatus)
   .then(parseJSON)
 )
 
 export const post = (path, data) => (
-  fetch(`http://localhost:8080/${path}`, {
+  fetch(`${host}${path}`, {
     method: 'POST',
     headers,
     body: JSON.stringify(data)

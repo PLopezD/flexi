@@ -41,3 +41,7 @@ buck-out/
 android/app/libs
 *.keystore
 .env
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -27,5 +27,6 @@ export const upload = {
 }
 
 export const main = {
-  config: {startDate: ''}
+  config: {startDate: ''},
+  scoreboard: []
 }

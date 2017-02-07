@@ -15,8 +15,8 @@ let controller = {
   },
   getUsers: (req,res,next) => {
     User.find(req.query)
-      .then(function(user) {
-        res.json(user)
+      .then(function(users) {
+        res.json(users)
       }, function(err) {
         res.json(err)
     })

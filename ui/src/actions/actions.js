@@ -26,7 +26,3 @@ export const calendarLoad = (bool) => (
 export const setImageSource = (imageObj) => (
   createAction(types.SET_IMAGE_SOURCE)(imageObj)
 )
-
-export const setTotalWorkoutDays = (result) => (
-  createAction(types.SET_TOTAL_WORKOUT_DAYS)(result)
-)

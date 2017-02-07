@@ -1,10 +1,13 @@
 import { createAction } from 'redux-actions'
 
 import * as api from '../services/api'
+import ScoreboardGenerator from '../services/scoreboardGenerator'
 import * as types from './types'
 
+let storeScoreBoard = createAction(types.STORE_SCOREBOARD)
+
 export const getWorkouts = (params) => (
-  dispatch => {
+  (dispatch, getState) => {
     let query = { date: params }
     let storeWorkouts = createAction(types.STORE_SELECTED_DATE_WORKOUTS)
     if (!params) {
@@ -15,6 +18,8 @@ export const getWorkouts = (params) => (
     const finishLoad = createAction(types.CALENDAR_LOAD)
     fetchWorkouts(query).then(workouts => {
       dispatch(storeWorkouts(workouts))
+      let scoreboardData = makeScoreboardGeneratorAndScoreboard(getState())
+      dispatch(storeScoreBoard(scoreboardData))
       dispatch(finishLoad(false))
     })
     .catch(err =>
@@ -28,11 +33,18 @@ const fetchWorkouts = (query) => {
   return api.get(`api/workouts?${queryString}`)
 }
 
+const makeScoreboardGeneratorAndScoreboard = (stateObject) => {
+  let ScoreGenerator = new ScoreboardGenerator(stateObject.main.workouts, stateObject.main.users, stateObject.main.totalWorkoutDays)
+  return ScoreGenerator.generateScoreboard() 
+}
+
 export const getUsers = () => (
-  dispatch => {
+  (dispatch, getState) => {
     let storeUsers = createAction(types.STORE_USERS)
     api.get('api/users').then(users => {
       dispatch(storeUsers(users))
+      let scoreboardData = makeScoreboardGeneratorAndScoreboard(getState())
+      dispatch(storeScoreBoard(scoreboardData))
     })
   }
 )

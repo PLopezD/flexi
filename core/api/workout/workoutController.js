@@ -18,7 +18,6 @@ let controller = {
     let query = _produceQuery(req.query)
     Workout.find(query)
     .then(function(workouts) {
-      console.log(workouts)
       res.json(workouts);
     }, function(err) {
       res.json(err);

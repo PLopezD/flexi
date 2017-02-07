@@ -18,18 +18,20 @@ export class CalendarHolder extends Component {
     this.props.setSelectedDate(date)
     this.props.getWorkouts(date)
   }
+  
   generateWorkoutEvents () {
     let workoutBubbles = []
     if (this.props.workouts) {
       let workouts = this.props.workouts
       workouts.forEach(workout => {
-        if (workout.user.email === this.props.user.email) {
+        if (workout.user.fbId === this.props.user.fbId) {
           workoutBubbles.push({date: workout.date, hasEventCircle: {backgroundColor: 'powderblue'}})
         }
       })
     }
     return workoutBubbles
   }
+
   render () {
     return (
       <View style={styles.container}>

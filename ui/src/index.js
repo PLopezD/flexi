@@ -54,7 +54,7 @@ class Container extends Component {
       )
     }
     const { user } = this.props
-    return user.email ? this.renderRoot(Main) : this.renderRoot(Login)
+    return user.token ? this.renderRoot(Main) : this.renderRoot(Login)
   }
 }
 const mapStateToProps = (state) => {

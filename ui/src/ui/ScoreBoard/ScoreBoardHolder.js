@@ -1,35 +1,35 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, ListView } from 'react-native'
 import Dimensions from 'Dimensions'
-import ScoreboardGenerator from '../../services/scoreboardGenerator'
+
 import { ScoreRow } from './ScoreRow'
 
 let { height } = Dimensions.get('window')
 
 export class ScoreBoardHolder extends Component {
   constructor () {
-    super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    super()
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
-    };
-  }
+      dataSource: ds.cloneWithRows([])
+    }
 
-  getScoreboard() {
-    let generator = new ScoreboardGenerator(this.props.workouts, this.props.users, this.props.totalWorkoutDays)
-    return generator.generateScoreboard()
-  } 
+  }
+  componentWillReceiveProps(nextProps) {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    this.state.dataSource = ds.cloneWithRows(nextProps.scoreboard || [])
+  }
   
   render() {
-    let scoreboardData = this.getScoreboard();
-    console.log(scoreboardData)
     return (
       <ListView
+        enableEmptySections={true}
         dataSource={this.state.dataSource}
         renderRow={(rowData) => this.renderRow(rowData)}
       />
-    );
+    )
   }
+  
   renderRow (rowData) {
     return (<ScoreRow {...this.props} rowData={rowData}/>)
   }
