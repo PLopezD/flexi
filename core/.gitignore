@@ -45,3 +45,5 @@ android/app/libs
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+./config/flexi.pem
