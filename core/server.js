@@ -10,8 +10,6 @@ let bodyParser   = require('body-parser');
 let config = require('./config/config.js');
 let api = require('./api');
 
-
-
 // configuration ===============================================================
 mongoose.connect(config.db.url); // connect to our database
 

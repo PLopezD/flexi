@@ -1,8 +1,15 @@
-import { combineReducers } from 'redux';
-import { ui } from './ui';
-import { user } from './user';
+import { combineReducers } from 'redux'
+
+import { calendar } from './calendar'
+import { main } from './main'
+import { ui } from './ui'
+import { upload } from './upload'
+import { user } from './user'
 
 export default combineReducers({
-  user,
-  ui
-});
+  calendar,
+  main,
+  ui,
+  upload,
+  user
+})

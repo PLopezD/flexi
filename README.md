@@ -53,3 +53,12 @@ Steps:
     b. challenge model
     c. user model
     d. 
+
+
+https://medium.com/@scottdixon/react-native-creating-a-custom-module-to-upload-camera-roll-images-7a3c26bac309#.stnvvk3d9
+https://www.npmjs.com/package/react-native-camera
+https://www.npmjs.com/package/blob-util
+https://github.com/wkh237/react-native-fetch-blob
+https://github.com/marcshilling/react-native-image-picker
+
+http://codebeautify.org/base64-to-image-converter

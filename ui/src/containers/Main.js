@@ -1,51 +1,78 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import TabView from 'react-native-scrollable-tab-view';
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import TabView from 'react-native-scrollable-tab-view'
 
-import { Scoreboard } from './Scoreboard';
-import { Upload } from './Upload';
-import { Calendar } from './Calendar';
-import { TabBar } from './TabBar';
+import { ScoreboardTab } from './ScoreboardTab'
+import { UploadTab } from './UploadTab'
+import { CalendarTab } from './CalendarTab'
+import { TabBar } from './TabBar'
 
 import { Header } from '../ui'
 
-export class Main extends Component {
-  constructor() {
-    super();
-    this.state = {
-      activeTab: 0
-    }
+import { changeTab } from '../actions/actions'
+import { getWorkouts } from '../actions/standardAsyncActions'
+
+export class Container extends Component {
+  constructor () {
+    super()
   }
 
-  handleTabChange = ({i}) => {
-    this.setState({activeTab: i});
+  handleTabChange ({i}) {
+    this.props.changeTab(i)
+  }
+  componentWillMount () {
+    this.props.getWorkouts()
   }
 
-  render() {
+  render () {
     return (
       <View style={{flex: 1}}>
-        <Header>flexi</Header>
+        <Header {...this.props}>flexi</Header>
         <TabView
+          page={this.props.activeTab}
           tabBarTextStyle={{ fontSize: 15 }}
           tabBarPosition="bottom"
-          onChangeTab={this.handleTabChange}
+          onChangeTab={this.handleTabChange.bind(this)}
           renderTabBar={() => <TabBar />}
         >
 
-          <Scoreboard
+          <ScoreboardTab
             tabLabel="ios-paper"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
           />
-          <Upload
+          <UploadTab
             tabLabel="ios-camera"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
+            {...this.props}
           />
-          <Calendar
+          <CalendarTab
             tabLabel="ios-calendar"
-            activeTab={this.state.activeTab}
+            activeTab={this.props.activeTab}
           />
         </TabView>
       </View>
-    );
+    )
   }
 }
+const mapActionsToProps = (dispatch) => ({
+  changeTab (tabIndex) {
+    return dispatch(changeTab(tabIndex))
+  },
+  getWorkouts () {
+    return dispatch(getWorkouts())
+  }
+})
+
+const mapStateToProps = (state) => ({
+  activeTab: state.ui.activeTab
+})
+
+export const Main = connect(mapStateToProps, mapActionsToProps)(Container)
+
+Container.propTypes = {
+  changeTab: React.PropTypes.func,
+  getWorkouts: React.PropTypes.func,
+  activeTab: React.PropTypes.number
+}
+

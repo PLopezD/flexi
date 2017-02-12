@@ -3,7 +3,7 @@ import controller from './userController';
 
 router.route('/')
   .post(controller.newUser)
-  .get(controller.getByDeviceId)
+  .get(controller.getUsers)
 
 
 export default router

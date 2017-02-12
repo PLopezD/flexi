@@ -1,19 +1,20 @@
-import React from 'react';
-import * as globalStyles from '../styles';
-import { Text, View, StyleSheet, Dimensions } from 'react-native';
+import React from 'react'
+import * as globalStyles from '../styles'
+import { Text, View, StyleSheet, Dimensions } from 'react-native'
+import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+const refreshIcon = (<Icon name="refresh" size={30} color="white" />)
 
-export const Header = (props) => {
-
-  return (
-    <View style={[styles.mainBar,props.style]}>
-      <View style={styles.headerItem}>
-        <Text style={styles.headerText}>{props.children}</Text> 
-      </View>
+export const Header = (props) => (
+  <View style={[styles.mainBar, props.style]}>
+    <View style={styles.headerItem}>
+      <Text style={styles.headerText}>{props.children}</Text>
     </View>
-  )
-};
+      <Button style={styles.refreshButton} onPress={props.getWorkouts}>{refreshIcon}</Button>
+  </View>
+)
 
-let {height, width} = Dimensions.get('window');
+let { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   mainBar: {
     height: 55,
@@ -27,10 +28,19 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     color: 'white',
     height: 10,
-    fontSize: 30, 
+    fontSize: 30,
     fontFamily: globalStyles.PRIMARY_FONT
   },
-  loading: {
-
+  refreshButton: {
+    position: 'absolute',
+    borderColor: 'transparent',
+    right: 5,
+    top: 15
   }
-});
+})
+
+Header.propTypes = {
+  children: React.PropTypes.string,
+  getWorkouts: React.PropTypes.func,
+  style: React.PropTypes.object
+}
