@@ -47,3 +47,4 @@ android/app/libs
 !.elasticbeanstalk/*.global.yml
 
 ./config/flexi.pem
+./node_modules
