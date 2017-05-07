@@ -11,7 +11,7 @@ router.route('/config').get((req, res) => {
     accessKey: process.env.AWS_ACCESS_KEY, 
     secretKey: process.env.AWS_SECRET_KEY,
     region: "us-east-2",
-    bucket: "flextester123",
+    bucket: "flexi-prod",
     successActionStatus: 201,
     startDate:"2017-01-01"
   })
