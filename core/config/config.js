@@ -1,4 +1,5 @@
-var dburl = 'mongodb://'+process.env.MONGODB_ADDRESS+':27017' || 'mongodb://localhost/flexi'
+var dburl = process.env.MONGODB_ADDRESS ? 'mongodb://'+ process.env.MONGODB_ADDRESS +':27017' : 'mongodb://localhost/flexi'
+
 module.exports = {
   logging: true,
   db: {
