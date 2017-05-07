@@ -9,7 +9,6 @@ router.use('/workouts', require('./workout/workoutRoutes'));
 router.route('/config').get((req, res) => {
   res.json({
     accessKey: process.env.AWS_ACCESS_KEY, 
-    secretKey: process.env.AWS_SECRET_KEY,
     region: "us-east-2",
     bucket: "flexi-prod",
     successActionStatus: 201,
