@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string "email", limit: 100, default: "", null: false
       t.string "username", limit: 25
       t.string "password_digest"
-      t.string "picture_url"
+      t.string "photo_url"
       t.timestamps
     end
   end
