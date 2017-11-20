@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171113063015) do
     t.string "email", limit: 100, default: "", null: false
     t.string "username", limit: 25
     t.string "password_digest"
-    t.string "image_url"
+    t.string "photo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
