@@ -11,4 +11,5 @@ export default class CalendarScreen extends React.Component {
      * content, we just wanted to give you a quick view of your config */
     return <ExpoConfigView />;
   }
+  
 }

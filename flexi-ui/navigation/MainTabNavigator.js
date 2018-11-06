@@ -50,7 +50,7 @@ CalendarStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  ScoreboardStack,
   CameraStack,
+  ScoreboardStack,
   CalendarStack,
 });
