@@ -10,7 +10,7 @@ import { ImagePicker, Camera, Permissions} from 'expo';
 
 export default class PhotoUpload extends React.Component {
   state = {
-    image: true,
+    image: null,
   };
 
   async componentWillMount() {
@@ -41,9 +41,18 @@ export default class PhotoUpload extends React.Component {
         </View>
         {image &&
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {/* <Image source={{ uri: image }} style={{ width: width, height: height }} /> */}
+            <Image source={{ uri: image }} style={{ width: width, height: height }} />
             <View style={styles.buttonHolder}>
-              <FloatingButton onPress={this._dumbPress}/>
+              <FloatingButton 
+                onPress={this._dumbPress}
+                icon='ios-close'
+                color='red'
+              />
+              <FloatingButton 
+                onPress={this._dumbPress}
+                icon='ios-checkmark'
+                color='red'
+              />
             </View>  
           </View>
         }
@@ -78,21 +87,12 @@ export default class PhotoUpload extends React.Component {
 const styles = StyleSheet.create({
   buttonHolder: {
     flex: 1,
-    backgroundColor: 'yellow',
     alignItems: 'stretch',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: width,
     marginBottom: 'auto',
     position: 'absolute',
     bottom: 10,
   },
-  buttonRight: {
-    position: 'absolute',
-    right: 0
-  },
-  buttonLeft: {
-    position: 'absolute',
-    left: 0
-  }
 })
