@@ -4,6 +4,7 @@ import { Dimensions } from 'react-native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 import { Button, ActionButton  } from 'react-native-material-ui';
+import FloatingButton from '../../components/FloatingButton';
 
 import { ImagePicker, Camera, Permissions} from 'expo';
 
@@ -42,14 +43,7 @@ export default class PhotoUpload extends React.Component {
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {/* <Image source={{ uri: image }} style={{ width: width, height: height }} /> */}
             <View style={styles.buttonHolder}>
-              <ActionButton 
-                icon="done" 
-                onPress={this._uploadImage}
-              />
-              <ActionButton 
-                icon="cloud-off" 
-                onPress={this._uploadImage}
-              />
+              <FloatingButton onPress={this._dumbPress}/>
             </View>  
           </View>
         }
@@ -75,20 +69,30 @@ export default class PhotoUpload extends React.Component {
       this.setState({ image: result.uri });
     }
   }
+  _dumbPress = () => {
+    console.log('12345');
+    
+  }
 }
 
 const styles = StyleSheet.create({
-  spacingView: {
-    // backgroundColor: '#fff',
-  },
   buttonHolder: {
     flex: 1,
-    borderWidth: 1,
-    backgroundColor: 'red',
+    backgroundColor: 'yellow',
     alignItems: 'stretch',
     flexDirection: 'row',
     justifyContent: 'center',
     width: width,
-    marginBottom: 'auto'
+    marginBottom: 'auto',
+    position: 'absolute',
+    bottom: 10,
+  },
+  buttonRight: {
+    position: 'absolute',
+    right: 0
+  },
+  buttonLeft: {
+    position: 'absolute',
+    left: 0
   }
 })
